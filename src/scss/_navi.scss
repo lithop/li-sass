@@ -1,0 +1,304 @@
+// #################### Hauptnavigation ####################
+
+#navi-trigger {
+    display: block;
+    position:relative;
+    float: right;
+    width: 44px;
+    height: 22px;
+    overflow: visible;
+    margin: {
+        top: 4px;
+        right: 0px;
+        bottom: 0px;
+        left: 40px;
+    }
+    padding: 0px;
+    cursor: pointer;
+    z-index: 3020;
+    span {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 0px;
+        width: 40px;
+        height: 2px;
+        background-color: $lic-primary3;
+        transition: background-color 0.3s linear 0.3s;
+    }
+    span::before, span::after {
+        display: block;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 40px;
+        height: 2px;
+        background-color: $lic-primary3;
+        content: "";
+    }
+    span::before {
+        top: -10px;
+        width: 30px;
+        transition: transform 0.15s linear 0s, top 0.3s linear 0.3s, width 0.3s linear 0.3s, background-color 0.15s linear 0s;
+    }
+    span::after {
+        top: 10px;
+        width: 20px;
+        transition: transform 0.15s linear 0s, top 0.3s linear 0.3s, width 0.3s linear 0.3s, background-color 0.15s linear 0s;
+    }
+}
+#navi-trigger.offen {
+    span{
+        background-color: transparent;
+        transition: background-color 0s linear 0.3s;
+    }
+    span::before{
+        top: 0px;
+        width: 40px;
+        background-color: $lic-icons;
+        transform: rotate(45deg);
+        transition: top 0.15s linear 0s, width 0.15s linear 0s, background-color 0.15s linear 0s, transform 0.3s linear 0.3s;
+    }
+    span::after{
+        top: 0px;
+        width: 40px;
+        background-color: $lic-icons;
+        transform: rotate(-45deg);
+        transition: top 0.15s linear 0s, width 0.15s linear 0s, background-color 0.15s linear 0s, transform 0.3s linear 0.3s;
+    }
+}
+
+#hauptnavi-overlay {
+    display: none;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    overflow-y: scroll;
+    z-index: 3010;
+    background-color: #ffffff;
+    //div.container {
+    //    position: relative;
+        div.navi-adressblock-bereich {
+            background-color: $lic-grau1;
+            padding-top: remcalc(65);
+            padding-bottom: remcalc(65);
+            div.navi-adressblock {
+                p, a {
+                    font: {
+                        family: $font-basis;
+                        weight: $font-regular;
+                        style: normal;
+                    }
+                    @include li-fontsize(16);
+                    @include li-line(20);
+                    color: $lic-primary3;
+                }
+                a:active, a:hover, a:focus {
+                    //box-shadow: none;
+                    text-decoration: none;
+                }
+            }
+        }
+        #hauptnavi-bereich-sperren {
+            display: block;
+            position: fixed;
+            top: 0px;
+            right: 10px;
+            left: 10px;
+            height: remcalc(130);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1.00) 0%,rgba(255,255,255,0.01) 100%);
+            z-index: 3015;
+        }
+    //}
+}
+#hauptnavi-overlay.offen {
+    display: block;
+}
+#hauptnavi {
+    a, a:active, a:hover, a:focus {
+        text-decoration: none;
+        color: $lic-primary3;
+    }
+    a::before, li::before {
+        display: none;
+    }
+    a::before {
+        display: inline-block;
+        font: {
+          family: $font-icon;
+          weight: $font-icon-w;
+        }
+        padding-right: emcalc(3, 16);
+        content: "\f061";
+    }
+    li {
+        left: 0px;
+        padding: 0px;
+        div.li-navi-balken {
+            display: block;
+            position: relative;
+            padding: {
+                top: remcalc(24);
+                right: remcalc(62);
+                bottom: remcalc(20);
+                left: remcalc(16);
+            }
+            margin-top: remcalc(20);
+            border: {
+                radius: 2px;
+                left: solid 4px;
+                top-color: transparent;
+                right-color: transparent;
+                bottom-color: transparent;
+                left-color: $lic-primary1;
+            }
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, $lic-grau1 100%);
+            div.li-navi-pfeil {
+                display: none; // Pfeil definieren, aber weglassen - kommt erst mit Unterpunkten dazu
+                position: absolute;
+                top: 0px;
+                right: remcalc(20);
+                width: remcalc(16);
+                height: 100%;
+                background-image: url("/files/lithop/img/navigation-pfeil.svg");
+                background-repeat: no-repeat;
+                background-position: center right;
+                background-size: remcalc(16) auto;
+                transform: rotate(-90deg);
+                transition: transform 0.3s ease;
+                content: " ";
+            }
+        }
+    }
+    li.dienstleistung {
+        div.li-navi-balken {
+        border-left-color: $lic-icons;
+        }
+    }
+    li.active, li.trail {
+        div.li-navi-balken {
+        background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(190, 220, 246, 0.6) 100%);
+        }
+    }
+    li:first-of-type {
+        div.li-navi-balken {
+        margin-top: 0px;
+        }
+    }
+    li {
+        div.li-navi-balken:hover,
+        div.li-navi-balken:focus {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(190, 220, 246, 0.6) 100%);
+        }
+    }
+    li.submenu {
+        div.li-navi-balken {
+            div.li-navi-pfeil {
+                display: block;
+                transform: rotate(0deg);
+            }
+        }
+    }
+    li.submenu.li-offen,
+    li.active.submenu.li-offen,
+    li.submenu.trail.li-offen {
+        div.li-navi-balken {
+            div.li-navi-pfeil {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    
+    // Ebene 2
+    ul.level_2 {
+        li {
+            display: none;
+            box-shadow: 0 20px 0px -19px $lic-grau2;
+            div.li-navi-balken {
+                padding: {
+                    top: remcalc(33);
+                    right: remcalc(20);
+                    bottom: remcalc(33);
+                    left: remcalc(20);
+                }
+                margin: 0px;
+                border: none;
+                background: none;
+                a, strong {
+                    font: {
+                        family: $font-basis;
+                        weight: $font-regular;
+                        style: normal;
+                    }
+                    @include li-fontsize(16);
+                    @include li-line(20);
+                }
+                a::before {
+                    display: none;
+                }
+                a:active, a:hover, a:focus, strong {
+                    font-weight: $font-black;
+                }
+                div.li-navi-pfeil {
+                    display: none;
+                }
+            }
+        }
+        li.last {
+            box-shadow: none;
+            margin-bottom: remcalc(-20);
+        }
+    }
+    li.submenu.li-offen,
+    li.active.submenu.li-offen,
+    li.submenu.trail.li-offen {
+        ul.level_2 {
+            li {
+                display: block;
+            }
+        }
+    }
+}
+
+
+// aktiver Overlay > beim Body das vertikale Scrollen verhindern
+body.offen {
+    max-height: 100vh;
+    overflow-y: hidden;
+}
+
+
+
+
+// #################### OnPage-Navigation ####################
+// Titeldefinition bei Basis > h2
+div.onpage-navi p {
+    margin: {
+        top: 0px;
+        right: 0px;
+        bottom: 6px;
+        left: 0px;
+    }
+    padding: 0px;
+    em {
+        font-weight: $font-black;
+        font-style: normal;
+        display: inline-block; // damit margin reagiert
+        margin-bottom: remcalc(27);
+    }
+    a {
+        margin-left: remcalc(28);
+    }
+    a::before {
+        display: inline-block;
+        font: {
+          family: $font-icon;
+          weight: $font-icon-w;
+        }
+        margin-left: remcalc(-28);
+        width: remcalc(28);
+        content: "\f0c1";
+    }
+}

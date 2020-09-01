@@ -1,0 +1,98 @@
+// Extra small devices (portrait phones, less than 576px) | Bootstrap xs-
+/*@media (max-width: 575.98px) { ... }*/
+@media (max-width: 575.98px) {
+
+// #################### Header ####################
+#head-suche-trigger {
+    display: none !important;
+}
+
+
+
+
+// #################### Home - Haupttitel (Slide 1) ####################
+// h1 auf h2-grösse verkleinern
+.li-home-haupttitel {
+    h1 {
+        @include li-fontsize(45);
+        @include li-line(56);
+    }
+}
+
+
+
+
+// #################### Home - Dienstleistungs-Links ####################
+div.box-dienstleistung.block {
+    padding-left: 20px;
+    .ce_image {
+        display: none;
+    }
+}
+
+
+
+
+// #################### Beratung Allgemein ####################
+// in Hochformat-Layout umwandeln
+div.beratung.verlauf1 {
+    justify-content: center;
+    flex-direction: column;
+    div.ce_text {
+        margin: {
+            top: 20px;
+            left: 0px;
+        }
+        padding-left: remcalc(10);
+        text-align: center;
+    }
+}
+
+// Innenabstände bei Hochformat-Version anpassen
+div.beratung.verlauf1.hoch {
+    padding: {
+        top: 20px;
+        bottom: 20px;
+    }
+    div.ce_text {
+        margin-top: 20px;
+    }
+}
+
+
+
+
+// #################### CTA PopUp unten fix positioniert ####################
+div.cta-popup-artikel {
+    width: 100%;
+    right: 0px;
+    bottom: 0px;
+}
+
+
+
+
+// #################### Wordcloud in Artikelstreifen ####################
+.mod_article.wordcloud {
+    figure {
+        margin: {
+            top: remcalc(-36);
+            bottom: remcalc(-36);
+        }
+        svg {
+            height: remcalc(248);
+        }
+    }
+}
+
+
+
+
+// #################### Portfolio-Seiten, Artikel-Teaser-Liste mit neuer Section ####################
+article.mod_article.portfolio-teaser {
+    width: calc(100% - 20px);
+}
+
+
+// Ende Media-Query
+}

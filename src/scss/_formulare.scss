@@ -1,0 +1,194 @@
+// #################### Grundeinstellungen für alle Formulare ####################
+
+div.ce_form {
+    overflow:visible; // wegen Schatten
+}
+
+div.formbody {
+    div.widget-captcha {
+        //display: block !important; // Nur für die Formatierung einblenden, danach diese Zeile wieder auskommentieren
+        span.captcha_text {
+            display: block;
+            padding-top: remcalc(12);
+            font-weight: $font-black;
+        }
+    }
+    div.widget {
+        margin-bottom: remcalc(24);
+    }
+    div.widget.formularboxen-gross {
+        margin-bottom: remcalc(65);
+    }
+    div.widget-select {
+        select {
+            min-width: 50%;
+            border: 1px solid $lic-grau2;
+            border-radius: 4px;
+            background-color: #ffffff;
+            padding: {
+                top: remcalc(10);
+                bottom: remcalc(10);
+                left: remcalc(16);
+            }
+        }
+    }
+    div.widget:last-of-type {
+        margin-bottom: 0px;
+    }
+    margin: 0px;
+    label {
+        margin-bottom: remcalc(6);
+        font-weight: $font-regular;
+    }
+    input,
+    textarea {
+        padding: remcalc(10);
+        border: 1px solid $lic-grau2;
+        border-radius: 4px;
+        background-color: #ffffff;
+    }
+    div.widget-upload {
+        margin-bottom: remcalc(6);
+        label {
+            font-weight: $font-black;
+        }
+        /*
+        input {
+            background-color: unset;
+            padding: 0px;
+        }
+        */
+    }
+    div.formlabel-fett > label {
+        font-weight: $font-black;
+    }
+    fieldset {
+        legend {
+            margin-bottom: remcalc(6);
+        }
+        span {
+            display: block;
+            margin-bottom: remcalc(3);
+            input {
+                height: remcalc(16);
+                width: remcalc(16);
+                margin-right: remcalc(5);
+            }
+        }
+        span:last-of-type {
+            margin-bottom: remcalc(0);
+        }
+    }
+    fieldset.formularboxen-gross {
+        span {
+            @include li-fontsize(25);
+            @include li-line(31);
+        }
+    }
+    fieldset.titel > legend { // grosse Zwischentitel, als Fieldset aufgebaut. Weitere Definitionen unter _base.scss -> h3
+        margin-bottom: remcalc(33);
+        padding-top: remcalc(65);
+    }
+    input::placeholder,
+    textarea::placeholder {
+        color: $lic-grau2;
+    }
+    input:focus,
+    textarea:focus,
+    select:focus {
+        box-shadow: 0 0 3px 0 $lic-primary2;
+        border-color: $lic-primary2;
+        animation-name: li-formfeld;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+    }
+    span.mandatory {
+        display: inline-block;
+        padding-left: remcalc(5);
+        font-weight: $font-black;
+        color: $lic-secondary5;
+    }
+    p.error {
+        @include li-fontsize(16);
+        @include li-line(20);
+        color: $lic-secondary5;
+        margin-bottom: remcalc(6);
+    }
+    p.error ~ input {
+        color: $lic-secondary5;
+        border-color: $lic-secondary5;
+        box-shadow: 0 0 3px 0 $lic-secondary5;
+    }
+    p.error ~input:focus {
+        animation-name: li-formfeld-error;
+        animation-duration: 0.25s;
+        animation-iteration-count: 2;
+    }
+    .widget-submit {
+        margin-top: remcalc(33);
+        margin-bottom: remcalc(33) !important;
+        button {
+            font-weight: $font-black;
+            @include li-fontsize(19);
+            @include li-line(24);
+            color: #ffffff;
+            padding: {
+                top: remcalc(16);
+                right: remcalc(59); // plus Icon-Breite und Abstand zwischen Text und Icon
+                bottom: remcalc(16);
+                left: remcalc(20);
+            }
+            background: unset;
+            transition: unset;
+            background-color: $lic-primary1;
+            border-radius: 0px;
+            border: 0px solid;
+            box-shadow: 0 15px 20px -15px rgba(0,0,0,0.5);
+            background-image: url("/files/lithop/img/senden.png");
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: auto remcalc(19);
+        }
+        button:hover,
+        button:focus {
+            background-color: #29317A;
+            box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+            background-position: right remcalc(-60) top remcalc(-60) !important;
+            transition: background-position 0.6s ease-in-out;
+        }
+        button:active {
+            background-color: #1F255C;
+            box-shadow: inset 2px 2px 2px 1px rgba(0,0,0,0.3);
+        }
+    }
+    div.formfeld-unsichtbar {
+        display: none;
+    }
+}
+
+
+
+
+// #################### Login-Formular und Such-Formular ####################
+
+div.mod_login,
+div.mod_search {
+    overflow: visible;
+    /*
+    h1 {
+      display: none;
+    }
+    */
+    button.submit {
+      background-image: url("/files/lithop/img/senden-pfeil.png");
+    }
+    button.submit:hover,
+    button.submit:focus,
+    button.submit:active {
+        background-position: right center !important;
+    }
+    p.login_info {
+        padding-bottom: remcalc(24);
+    }
+  }
+  

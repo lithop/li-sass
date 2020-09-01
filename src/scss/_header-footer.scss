@@ -1,0 +1,187 @@
+// Header
+#header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  padding: {
+    top: 34px;
+    right: 0px;
+    bottom: 34px;
+    left: 0px;
+  }
+  z-index: 3000;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1.00) 0%,rgba(255,255,255,0.01) 100%);
+  transition: all 0.5s ease;
+  p {
+    font: {
+      family: $font-basis;
+      weight: $font-regular;
+    }
+    @include li-fontsize(19);
+    @include li-line(24);
+    margin: 0px;
+  }
+  a {
+    text-decoration: none;
+    border: none;
+  }
+  #logo {
+    display: block;
+    width: 181px;
+    height: 84px;
+    transition: all 0.5s ease;
+    a {
+      display: block;
+      margin: 0px;
+      padding: 0px;
+      transition: all 0.5s ease;
+    }
+    a:hover, a:active, a:focus {
+      text-decoration: none;
+    }
+    a::before {
+      display: none;
+    }
+  }
+  #navi-mail {
+    a::before {
+      content: "\f1d8";
+    }
+  }
+/*  #navi-trigger {
+    text-align: right;
+  }*/
+}
+#header.fixiert1 {
+  padding: {
+    top: 15px;
+    bottom: 15px;
+  }
+  background-color: $lic-grau1;
+  box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+  #logo {
+    width: 132px;
+    height: 62px;
+  }
+}
+
+// Telefon- und Mail-Icons
+#navi-mail {
+  display: block;
+  position: relative;
+  float: right;
+  height: 30px; // Platz für Suchmaske und Höhe (vertikales Einmitten) reservieren
+  margin: {
+    top: 4px;
+    right: 0px;
+    bottom: 0px;
+    left: 40px;
+  }
+  a {
+      color: $lic-primary3;
+  }
+  a:hover, a:active, a:focus, a:hover::before {
+    text-decoration: none;
+    color: $lic-icons;
+  }
+  a::before {
+      color: $lic-primary3;
+  }
+}
+#navi-tel-desktop {
+  display: block;
+  position: relative;
+  float: right;
+  margin: {
+      top: 4px;
+      right: 0px;
+      bottom: 0px;
+      left: 40px;
+  }
+  a {
+      color: $lic-primary3;
+  }
+  a:hover, a:active, a:focus, a:hover::before {
+    text-decoration: none;
+    color: $lic-icons;
+  }
+  a::before {
+      color: $lic-primary3;
+  }
+}
+#navi-tel-mobile {
+  display: none;
+  a {
+    flex: 0 0 auto;
+    @include li-fontsize(45);
+    @include li-line(45);
+  }
+  a:hover, a:active, a:focus {
+    transform: unset;
+    transform: none;
+    color: $lic-icons;
+  }
+  a.navi-tel-mobile-text {
+    flex: 0 0 auto;
+    @include li-fontsize(19);
+    @include li-line(24);
+  }
+  a.navi-tel-mobile-text::before {
+    display: none;
+  }
+}
+/*
+#navi-tel-mobile::before {
+  display: none;
+}
+*/
+// Suche ist unter _contao_elemente definiert
+
+
+// Footer
+#footer {
+  background-color: $lic-primary3;
+  padding-top: remcalc(65);
+  p {
+    color: #ffffff;
+  }
+  a[href^="tel"], a[href^="mailto"] {
+    font-weight: $font-regular;
+  }
+  a, a:visited, a:hover, a:active, a:focus {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $lic-icons;
+  }
+  section.seo-akkordeon {
+    a, a:visited, a:hover, a:active, a:focus {
+      color: $lic-primary3;
+      font-weight: $font-regular;
+    }
+    a::before {
+      color: $lic-primary3;
+    }
+  }
+  .li-footer-icons {
+    display: block;
+    float: none;
+    clear: both;
+    overflow: hidden;
+    .container {
+      padding: {
+        top: remcalc(65);
+        bottom: remcalc(65);
+      }
+    }
+    background-color: #0C0C32;
+    [class^="sharethis"] {
+      display: block;
+      float: none;
+      clear: both;
+      overflow: visible;
+      height: 100%;
+    }
+  }
+}

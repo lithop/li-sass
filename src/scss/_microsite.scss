@@ -1,0 +1,219 @@
+// #################### Microsite - Global ####################
+
+.liMicro {
+  // Always show mail icon in the top nav bar
+  #navi-mail {
+    display: block;
+  }
+  // Add background gradient to all slides
+  div.slide-onPageNavi,
+  div.slide-example {
+    &::before {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      content: " ";
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.85) 45%,
+        rgba(255, 255, 255, 0.1) 85%
+      );
+    }
+  }
+  // Mediaqueries – Remove gradient
+  div.slide-onPageNavi {
+    &::before {
+      @media (max-width: 767.98px) {
+        background: none;
+      }
+    }
+  }
+  // Mediaqueries – Replace image with color
+  div.slide-onPageNavi {
+    &.bgCta {
+      @media (max-width: 767.98px) {
+        background-color: #e5f1fb;
+        background-image: none !important;
+      }
+    }
+  }
+  // Add margin to cta button
+  div.ce_sliderStart {
+    &.li-hero {
+      .kopf-cta {
+        &.margin {
+          margin-top: 4.0625rem;
+          margin-bottom: 2.0625rem;
+        }
+      }
+    }
+  }
+  // Hinweisbox
+  .microsite-overlay-wrapper {
+    #microsite-overlay {
+      position: fixed;
+      left: remcalc(33);
+      bottom: remcalc(33);
+      padding: remcalc(12);
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.08),
+        0 15px 15px -15px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      width: remcalc(48);
+      overflow: hidden;
+      white-space: nowrap;
+      transition: width 300ms ease-in-out, opacity 300ms ease-in-out;
+      opacity: 0.5;
+      &:hover {
+        width: 257px;
+        opacity: 1;
+        .microsite-overlay-content {
+          p {
+            color: $lic-primary3;
+          }
+        }
+      }
+      .microsite-overlay-content {
+        p {
+          transition: color 300ms ease-in-out;
+          color: #ffffff;
+          &::before {
+            display: inline-block;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            padding-right: 0.1875em;
+            content: "\f05a";
+            color: $lic-primary3;
+          }
+        }
+      }
+      // Mediaqueries
+      @media (max-width: 767.98px) {
+        position: relative;
+        background-color: $lic-primary1;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        left: 0;
+        bottom: 0;
+        transition: none;
+        opacity: 1;
+        .microsite-overlay-content {
+          p,
+          a {
+            color: #ffffff;
+            &::before {
+              color: #ffffff;
+            }
+          }
+        }
+        &:hover {
+          width: 100%;
+          .microsite-overlay-content {
+            p,
+            a {
+              color: #ffffff;
+              &::before {
+                color: #ffffff;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media (max-width: 767.98px) {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// #################### Microsite - Theme Color ####################
+
+// Quick Access – change colors here
+$word-vorlage-grau1: #e4eef1;
+$word-vorlage-grau2: #cde0e4;
+// tbc ...
+
+@mixin themecolor(
+  $lic-grau1-microsite: $lic-grau1,
+  $lic-grau2-microsite: $lic-grau2
+) {
+  .li-hero {
+    .onpage-navi {
+      p {
+        em {
+          color: $lic-secondary6;
+        }
+      }
+    }
+    nav {
+      &.slider-control {
+        .slider-menu {
+          b {
+            color: $lic-grau2-microsite;
+          }
+        }
+      }
+    }
+  }
+  nav {
+    &.slider-control {
+      .slider-menu {
+        b {
+          color: $lic-grau2-microsite;
+        }
+      }
+    }
+  }
+  .mod_article,
+  div.hellgrau {
+    background-color: $lic-grau1-microsite;
+  }
+  .mod_article.dunkelgrau {
+    background-color: $lic-grau2-microsite;
+  }
+  .formbody {
+    input,
+    textarea {
+      border: 1px solid $lic-grau2-microsite;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: $lic-secondary6;
+  }
+  .beratung {
+    h4 {
+      color: #ffffff;
+    }
+  }
+  hr,
+  .li-trennlinie {
+    background: linear-gradient(
+      135deg,
+      $lic-grau1-microsite 0%,
+      $lic-grau2-microsite 49.98%,
+      $lic-grau1-microsite 100%,
+      $lic-grau1-microsite 100%
+    );
+  }
+  #toplink-fix {
+    background-color: $lic-grau2-microsite;
+  }
+}
+
+// word-vorlage.ch
+.liMicro {
+  &.wordVorlage {
+    @include themecolor(
+      $lic-grau1-microsite: $word-vorlage-grau1,
+      $lic-grau2-microsite: $word-vorlage-grau2
+    );
+  }
+}

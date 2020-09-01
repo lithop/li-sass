@@ -1,0 +1,202 @@
+// Small devices (landscape phones, less than 768px) | Bootstrap sm-
+/*@media (max-width: 767.98px) { ... }*/
+@media (max-width: 767.98px) {
+
+// Root-Element verkleinern. Alle Elemente, die mit REM-aufgebaut sind, skalieren sich entsprechend
+:root {
+    font-size: 13.4736842112px;
+    //font-size: 84.2105263158%;
+}
+html {
+    font-size: 84.2105263158%;
+}
+
+// Header, Suche und Navi
+#navi-mail {
+    display: none;
+}
+#navi-tel-desktop {
+    display: none;
+}
+/*
+#head-suche-trigger, #head-suche {
+    display: none !important;
+}
+*/
+#head-suche-trigger {
+    margin-top: 20px;
+}
+#navi-trigger {
+    margin: {
+        top: 20px;
+        bottom: 20px;
+    }
+}
+#header {
+    padding: {
+        top: 15px;
+        bottom: 15px;
+    }
+    #logo {
+        width: 132px;
+        height: 62px;
+    }
+    div.container {
+        padding: {
+        left: 30px;
+        right: 30px;
+    }
+  }
+}
+#header.fixiert1 {
+    #logo {
+        display: none;
+    }
+    #navi-tel-mobile {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        a {
+            color: $lic-primary3;
+        }
+        a:hover, a:active, a:focus {
+            color: $lic-icons;
+        }
+    }
+    #navi-tel-mobile::before {
+        display: block;
+    }
+}
+
+
+
+
+// #################### Titelgrössen nachkorrigieren ####################
+
+h1 {
+    @include li-fontsize(50);
+    @include li-line(60);
+}
+h2 {
+    @include li-fontsize(40);
+    @include li-line(50);
+}
+
+
+
+
+// #################### Artikel-Hintergründe und Kopfbereiche ####################
+// Innenabstände und Höhe Hero-Bild bei Seiten mit fixiertem Kopfbereich
+body.header-kopf-fix {
+    #container #main div.inside { // für IE11 korrigiert
+      padding-top: 514px; // Höhe von #main hier abziehen
+    }
+    #container #main.fixiert1 div.inside { // für IE11 korrigiert
+      padding-top: 546px; // Höhe von #main hier abziehen
+    }
+  }
+body.header-kopf-fix {
+    div.kopf-fix, div.kopf-rollen {
+        height: 666px;
+    div.abstand-kopf-fix {
+        height: remcalc(65);
+        }
+    }
+}
+
+
+// Rollender Kopfbereich bzw. rollende Hero-Bilder - z.B. bei Portfolio-Teaser und -Artikel
+div.kopf-rollen {
+
+    width: 100%;
+    height: 666px;
+}
+
+
+// Home-Slider-Höhe anpassen
+div.ce_sliderStart.li-hero {
+    .content-slider {
+        height: 666px;
+        div.home-slides-hg {
+            height: 666px;
+        }
+    }
+    // spezielle CTA im Hero-Slider umpositionieren
+    div.textbereich-absolut.hero-cta-unten {
+        top: inherit;
+        bottom: remcalc(65);
+    }
+}
+
+
+
+
+// #################### Home - Über uns ####################
+
+div.li-ueber-uns {
+    .ce_image {
+        figure {
+            height: 67px;
+        }
+    }
+}
+
+
+
+
+// #################### Home Einleitung ####################
+.info-box {
+    height: 330px;
+}
+
+
+
+
+// #################### Grosse Referenzen (Zufallsartikel) ####################
+
+div.zufallsartikel-grosse-referenz {
+    div.mod_article:nth-of-type(2) {
+        display: none;
+    }
+}
+
+
+
+
+// #################### Wordcloud in Artikelstreifen ####################
+.mod_article.wordcloud {
+    figure {
+        margin: {
+            top: remcalc(-34);
+            bottom: remcalc(-34);
+        }
+        svg {
+            height: remcalc(362);
+        }
+    }
+}
+
+
+
+
+// #################### Portfolio-Seiten, Artikel-Teaser-Liste mit neuer Section ####################
+article.mod_article.portfolio-teaser {
+    max-height: 354px;
+}
+
+
+
+
+// #################### Vimeo-Video ####################
+.bereich-mobile-zentriert {
+    text-align: center;
+    .ce_vimeo {
+        display: inline-block;
+        float: none;
+    }
+}
+
+
+// Ende Media-Query
+}

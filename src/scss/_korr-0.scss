@@ -1,0 +1,22 @@
+// Allgemeine Korrekturen (Media-Queries), nicht auf Bootstrap-Sprünge bezogen
+@media (max-height: 867px) {
+body.header-kopf-fix {
+    #container #main div.inside,
+    #container #main.fixiert1 div.inside {
+        margin-top: 0px;
+        padding-top: 0px;
+        div.kopf-fix {
+            position: relative;
+        }
+    }
+}
+
+} // Ende
+
+
+// Mitscrollende (rollende) Portfolio-Seiten
+@media (max-width: 767.98px) {
+    div.kopf-rollen ~ div.kopf-abstand {
+        padding-top: 666px;
+        }
+} // Ende

@@ -1,0 +1,41 @@
+// Large devices (desktops, less than 1200px) | Bootstrap lg- | kein xl- da mit max-width gearbeitet wird (0px bis unbegrenzt = Basisdefinitionen / Anpassung über 1200px [xl-] in Basis definieren und hier zurücksetzen)
+/*@media (max-width: 1199.98px) { ... }*/
+@media (max-width: 1199.98px) {
+
+// #################### Hero-Slider ####################
+div.ce_sliderStart.li-hero:hover {
+    nav.slider-control {
+        a {
+            visibility: hidden;
+            display: none;
+        }
+    }
+}
+
+
+
+
+// #################### Wordcloud in Artikelstreifen ####################
+.mod_article.wordcloud {
+    figure {
+        margin: {
+            top: remcalc(-130);
+            bottom: remcalc(-129);
+        }
+        svg {
+            height: remcalc(654);
+        }
+    }
+}
+
+
+
+
+// #################### Portfolio-Seiten, Artikel-Teaser-Liste mit neuer Section ####################
+article.mod_article.portfolio-teaser {
+    max-height: 423px;
+}
+
+
+// Ende Media-Query
+}

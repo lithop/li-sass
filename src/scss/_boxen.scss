@@ -1,0 +1,955 @@
+// #################### Browser-Overlay für alte IE, Opera, Opera Mobile ####################
+#browser-overlay {
+    display: none;
+    .browser-overlay-content {
+        display: none
+    }
+}
+body.ie6,
+body.ie7,
+body.ie8,
+body.ie9,
+body.ie10 {
+    #browser-overlay {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: $lic-primary2;
+        text-align: center;
+        z-index: 10000;
+        opacity: 0.95;
+        .browser-overlay-content {
+            display: block;
+            position: absolute;
+            top: 33px;
+            left: 10%;
+            width: 80%;
+            padding: 20px;
+            margin: 0px;
+            background: #fff;
+            color: $lic-secondary5;
+        }
+    }
+}
+
+
+
+
+// #################### Gloabl - Hinweisbox ####################
+
+.hinweisbox, blockquote {
+    width: 100%;
+    margin: {
+        top: remcalc(65);
+        bottom: remcalc(65);
+    }
+    padding: remcalc(10);
+    border: {
+        radius: 4px;
+        left: solid 10px;
+        top-color: transparent;
+        right-color: transparent;
+        bottom-color: transparent;
+        left-color: $lic-icons;
+    }
+    background: linear-gradient(90deg, #FFFFFF 0%, $lic-grau1 100%);
+    p:first-child {
+        font-weight: $font-black;
+    }
+}
+
+
+
+
+// #################### Home Einleitung ####################
+
+.info-box {
+    height: 470px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    .info-box-content {
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        bottom: 0px;
+        left: 10px;
+        padding: {
+            top: remcalc(65);
+            left: remcalc(20);
+            right: remcalc(20);
+        }
+        border-radius: 4px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.85) 25%, rgba(255,255,255,0) 50%);
+    }
+    .ce_image, .mod_randomImage {
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 10px; //wegen Padding von Bootsrap-Grid
+        width: calc(100% - 20px); //wegen Padding links/rechts von Bootsrap-Grid
+        border-radius: 4px;
+        figure {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            img {
+                display: block;
+                max-width: none; //wichtig, weil Contao-Responsive-Layout-CSS max-width auf 100% setzt, was hier nicht sein darf
+                border-radius: 4px;
+            }
+        }
+    }
+    .ce_hyperlink {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        a:active, a:hover, a:focus {
+            text-decoration: none;
+        }
+        a::before {
+            display: none;
+        }
+    }
+}
+div.container .info-box.block {
+    overflow: hidden;
+}
+.info-box-hover {
+    transition: all 0.3s ease;
+    margin: {
+        top: remcalc(10);
+        bottom: remcalc(10);
+    }
+}
+.info-box-hover:hover {
+    transform: scale(1.02);
+    .info-box {
+        box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+    }
+}
+.info-box-hover.li-mousedown.active {
+    transform: scale(0.98);
+    .info-box {
+        box-shadow: 0 3px 15px 0 rgba(0,0,0,0.28), 0 15px 15px -15px rgba(0,0,0,0.5);
+    }
+}
+
+
+
+
+// #################### CTA-Buttons ####################
+
+div.cta-button-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    margin-bottom: remcalc(10);
+    overflow: visible;
+    div.cta-button {
+        display: flex;
+        align-items: center;
+        position: relative;
+        background-color: $lic-primary1;
+        box-shadow: 0 15px 20px -15px rgba(0,0,0,0.5);
+        padding: {
+            top: remcalc(16);
+            right: remcalc(20);
+            bottom: remcalc(15);
+            left: remcalc(20);
+        }
+        div.ce_hyperlink {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            a::before {
+                display: none;
+            }
+            a {
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+            a:active, a:hover, a:focus {
+                text-decoration: none;
+            }
+        }
+        div.ce_text {
+            flex: 1 1 auto;
+            padding-right: remcalc(40);
+            p {
+                font-weight: $font-black;
+                color: #ffffff;
+            }
+        }
+        div.cta-icon {
+            flex: 0 1 auto;
+            p::before {
+                display: inline-flex;
+                font: {
+                    family: $font-icon;
+                    weight: $font-icon-w;
+                }
+                color: #ffffff;
+                content: "\f061";
+            }
+        }
+        div.cta-icon.preis p::before {
+                content: "\f1ec";
+        }
+        div.cta-icon.pfeil p::before {
+            content: "\f061";
+        }
+        div.cta-icon.telefon p::before {
+            content: "\f095";
+        }
+        div.cta-icon.mail p::before {
+            content: "\f1d8";
+        }
+        div.cta-icon.auge p::before {
+            content: "\f06e";
+        }
+        div.cta-icon.file p::before {
+            content: "\f56d";
+        }
+    }
+    div.cta-button:hover {
+        background-color: #29317A;
+        //transform: scale(1.02);
+        box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+    }
+}
+div.cta-button-container.active {
+    div.cta-button {
+    background-color: #1F255C;
+    //transform: scale(0.98);
+    box-shadow: inset 2px 2px 2px 1px rgba(0,0,0,0.3);
+    }
+}
+
+
+// Farbvarianten
+div.cta-button-container {
+    div.cta-button.pink {
+        background-color: $lic-secondary3;
+    }
+    div.cta-button.pink:hover {
+        background-color: #CC2952;
+    }
+}
+div.cta-button-container.active {
+    div.cta-button.pink {
+        background-color: #991F3D;
+    }
+}
+
+
+// Secondary-Design
+div.cta-button-container.secondary {
+    color: $lic-primary1;
+    div.cta-button {
+        background-color: $lic-grau1;
+        border: 1px solid $lic-primary1;
+        div.ce_text {
+            p {
+                color: $lic-primary1;
+            }
+        }
+        div.cta-icon {
+            p::before {
+                color: $lic-primary1;
+            }
+        }
+    }
+    div.cta-button:hover {
+        background-color: #E2E2E6;
+        box-shadow: 0 15px 20px -15px rgba(0,0,0,0.5);
+    }
+}
+div.cta-button-container.secondary.active {
+    div.cta-button {
+        background-color: #D0D0D4;
+        box-shadow: inset 2px 2px 2px 1px rgba(0,0,0,0.12)
+    }
+}
+
+
+// CTA unten fix positioniert
+div.cta-unten-fix {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding-top: remcalc(130);
+    background: linear-gradient(0deg, $lic-grau1 0%, rgba(244,244,248,0.9) 36.5%, rgba(244,244,248,0) 100%);
+    z-index: 1000;
+    div.cta-button-container {
+        justify-content: center;
+    }
+}
+
+// CTA PopUp unten fix positioniert
+div.cta-popup-artikel {
+    position: fixed !important;
+    background: unset;
+    background-color: transparent;
+    width: remcalc(447);
+    right: remcalc(55);
+    bottom: remcalc(55);
+    padding: 10px;
+    overflow: visible; // wegen Schatten
+    z-index: 1000;
+    div.cta-popup {
+        position: relative;
+        padding: remcalc(20);
+        background-color: #ffffff;
+        border-radius: 4px;
+        box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+        div.schliessen {
+            position: absolute;
+            display: block;
+            top: remcalc(11);
+            right: remcalc(10);
+            cursor: pointer;
+            span::before {
+                font: {
+                    family: $font-icon;
+                    weight: $font-icon-w;
+                    style: normal;
+                }
+                @include li-fontsize(19);
+                @include li-line(24);
+                color: $lic-primary1;
+                content: "\f00d";
+            }
+        }
+    }
+}
+div.cta-popup-artikel {
+    opacity: 0;
+    transition: opacity 1.5s;
+    div.cta-popup {
+        right: -200vh;
+        transition: right 1.5s;
+    }
+}
+div.cta-popup-artikel.animated {
+    opacity: 1;
+    div.cta-popup {
+        right: 0px;
+    }
+}
+div.cta-popup-artikel.geschlossen {
+    opacity: 0;
+    display: none;
+}
+
+
+// Download-Element
+// Grund-Definitionen bei contao_elemente.scss
+div.cta-button-container {
+    .ce_download {
+        display: inline-flex;
+        margin-right: remcalc(40);
+        p {
+            padding: 0px;
+            margin: 0px;
+            background: none;
+            background: unset;
+            a {
+                color: #ffffff;
+            }
+            a:active, a:hover, a:focus {
+                text-decoration: none;
+            }
+        }
+    }
+    .ce_downloads {
+        display: inline-flex;
+        margin-right: remcalc(40);
+        ul {
+            li {
+                position: relative;
+                left: 0px;
+                right: 0px;
+                padding: 0px;
+                margin: 0px;
+                background: none;
+                background: unset;
+                a {
+                    color: #ffffff;
+                }
+                a:active, a:hover, a:focus {
+                    text-decoration: none;
+                }
+            }
+            li::before {
+                display: none;
+            }
+        }
+    }
+}
+
+
+
+
+// #################### CTA-Buttons im Bild-Kopfbereich ####################
+
+div.kopf-cta {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: visible;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    margin-top: remcalc(65);
+    margin-bottom: remcalc(33);
+    div.ce_hyperlink {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        a::before {
+            display: none;
+        }
+        a {
+            display: block;
+            height: 100%;
+            width: 100%;
+            box-shadow: none;
+        }
+        a:active, a:hover, a:focus {
+            text-decoration: none;
+        }
+    }
+    div.ce_text {
+        h3 {
+            position: relative;
+            color: #ffffff;
+            background-color: $lic-secondary3;
+            margin: 0px;
+            padding: {
+                top: remcalc(30);
+                right: remcalc(65);
+                bottom: remcalc(29);
+                left: remcalc(20);
+            }
+        }
+        h3::after {
+            position: absolute;
+            color: #ffffff;
+            top: calc(50% - 20px);
+            right: 0px;
+            width: remcalc(49);
+            font: {
+                family: $font-icon;
+                weight: $font-icon-w;
+            }
+            content: "\f061";
+        }
+        p {
+            flex: 1 1 100%;
+            position: relative;
+            color: $lic-secondary3;
+            font-weight: $font-black;
+            background-color: #ffffff;
+            margin: 0px;
+            padding: {
+                top: remcalc(10);
+                right: remcalc(49);
+                bottom: remcalc(10);
+                left: remcalc(48);
+            }
+        }
+        p::before {
+            position: absolute;
+            top: 0px;
+            left: 20px;
+            width: remcalc(49);
+            padding-top: remcalc(10);
+            font: {
+                family: $font-icon;
+                weight: $font-icon-w;
+            }
+            content: "\f559";
+        }
+    }
+}
+div.kopf-cta:hover {
+    transform: scale(1.02);
+    box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+    div.ce_text {
+        h3 {
+            background-color: #CC2952;
+        }
+    }
+}
+div.kopf-cta.active  {
+    transform: scale(0.98);
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.28), 0 15px 15px -15px rgba(0,0,0,0.5);
+    div.ce_text {
+        h3 {
+            background-color: #991F3D;
+        }
+    }
+}
+
+
+
+
+// #################### Beratung Allgemein ####################
+
+div.beratung {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: remcalc(65);
+    margin-bottom: remcalc(65);
+    div.ce_image {
+        flex: 0 0 82px;
+        img {
+            width: 82px;
+            height: 82px;
+            border-radius: 82px;
+            box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+        }
+    }
+    div.ce_text {
+        flex: 1 1 auto;
+        width: 100%;
+        margin-left: remcalc(33);
+        padding-right: remcalc(10);
+    }
+    p, h4, a {
+        color: #ffffff;
+        margin: 0px;
+    }
+    a:visited, a:hover, a:focus {
+        color: #ffffff;
+    }
+}
+div.beratung.verlauf1 {
+    background: $lic-verlauf1;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+}
+
+// Hochformat, identisch auch bei korr-1 für die normale Box übernehmen
+div.beratung.verlauf1.hoch {
+    justify-content: center;
+    flex-direction: column;
+    padding: {
+        top: 33px;
+        right: 20px;
+        bottom: 33px;
+        left: 20px;
+    }
+    margin-top: 0px;
+    margin-bottom: 0px;
+    div.ce_text {
+        margin: {
+            top: 33px;
+            left: 0px;
+        }
+        padding-left: remcalc(10);
+        text-align: center;
+    }
+}
+
+
+
+
+// #################### Home - Dienstleistungs-Links ####################
+
+div.box-dienstleistung.block {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    min-height: remcalc(148);
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    margin: {
+        top: remcalc(10);
+        bottom: remcalc(10);
+    }
+    padding-left: 0px;
+    transition: all 0.3s ease;
+    .ce_image {
+        flex: 0 0 80px;
+        figure {
+            width: 50px;
+            margin: {
+                left: auto;
+                right: auto;
+            }
+        }
+    }
+    .ce_text {
+        flex: 1 1 100%;
+        padding: {
+            top: 25px;
+            bottom: 25px;
+        }
+        p {
+            font: {
+                family: $font-basis;
+                weight: $font-black;
+                style: normal;
+                }
+            color: $lic-primary3;
+            letter-spacing: -0.8px;
+            @include li-fontsize(33);
+            @include li-line(41);
+            margin-bottom: 0px;
+        }
+    }
+    .box-dienstleistung-pfeil {
+        flex: 0 0 57px;
+        align-self: stretch;
+        height: remcalc(148);
+        background-color: $lic-primary1;
+        margin-left: remcalc(5);
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        p {
+            flex: 0 0 auto;
+        }
+        p::before {
+            display: inline-flex;
+            font: {
+                family: $font-icon;
+                weight: $font-icon-w;
+            }
+            color: #ffffff;
+            content: "\f061";
+        }
+    }
+    .ce_hyperlink {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        a:active, a:hover, a:focus {
+            text-decoration: none;
+        }
+        a::before {
+            display: none;
+        }
+    }
+}
+
+
+// Hover bei Pfeilen
+div.box-dienstleistung:hover {
+    transform: scale(1.02);
+    box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+}
+div.box-dienstleistung.li-mousedown.active{
+    transform: scale(0.98);
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.28), 0 15px 15px -15px rgba(0,0,0,0.5);
+}
+div.box-dienstleistung:hover div.box-dienstleistung-pfeil {
+    transition: all 0.3s ease;
+    background-color: $lic-icons;
+}
+
+
+
+
+// #################### Home - Über uns ####################
+
+div.li-ueber-uns,
+div.li-piktogramme {
+    margin: {
+        top: remcalc(65);
+        bottom: remcalc(65);
+    }
+    text-align: center;
+    .ce_image {
+        display: inline-block;
+        figure {
+            height: remcalc(80);
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .ce_text {
+        margin-top: remcalc(33);
+        strong {
+            @include li-fontsize(45);
+            @include li-line(56);
+            letter-spacing: -0.8px;
+        }em {
+            font-style: normal;
+            font-weight: $font-black;
+        }
+    }
+}
+
+// Spezieller Abstand
+div.li-piktogramme {
+    margin: {
+        top: remcalc(33);
+        bottom: remcalc(33);
+    }
+}
+
+
+
+
+// #################### Pakete Allgemein ####################
+
+.paket-box {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: {
+        top: 10px;
+        bottom: 20px;
+    }
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    background: $lic-verlauf7;
+    z-index: 0;
+    transition: all 0.3s ease;
+    .paket-box-content {
+        display: block;
+        position: relative;
+        padding: {
+            top: remcalc(33);
+            left: remcalc(20);
+            right: remcalc(5);
+            bottom: remcalc(33);
+        }
+        border-radius: 4px;
+        z-index: 0;
+        .ce_text {
+            p {
+                color: #ffffff;
+                margin-bottom: remcalc(33);
+                padding-right: remcalc(10);
+                strong {
+                    @include li-fontsize(33);
+                    @include li-line(41);
+                    margin-bottom: 0px;
+                }
+            }
+        }
+        .ce_hyperlink {
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            a:active, a:hover, a:focus {
+                text-decoration: none;
+            }
+            a::before {
+                display: none;
+            }
+        }
+    }
+    .ce_image {
+        display: block;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        z-index: -1;
+        border-radius: 4px;
+        figure {
+            display: block;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            height: 158px; //wegen SVG-Fehler von IE muss hier die Höhe angegeben werden.
+            border-radius: 4px;
+            svg {
+                //max-width: none; //wichtig, weil Contao-Responsive-Layout-CSS max-width auf 100% setzt, was hier nicht sein darf
+                width: 540px; //wegen SVG-Fehler von IE muss das Responsive-Verhalten umgangen werden mit fixer Breite.
+                border-radius: 4px;
+            }
+        }
+    }
+}
+div.container .paket-box.block {
+    overflow: hidden;
+}
+.paket-box-hover {
+    overflow: visible;
+    transition: all 0.3s ease;
+}
+.paket-box-hover:last-child {
+    margin-bottom: -10px;
+}
+.paket-box-hover:hover {
+    transform: scale(1.02);
+    .info-box {
+        box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+    }
+}
+.paket-box-hover.li-mousedown.active {
+    transform: scale(0.98);
+    .paket-box {
+        box-shadow: 0 3px 15px 0 rgba(0,0,0,0.28), 0 15px 15px -15px rgba(0,0,0,0.5);
+    }
+}
+
+// Auf den Zielseiten immer nur 1 Paket, deshalb ohne Abstände und auch keine Hover-Effekte. Link wird im BE deaktiviert und wegen Schatten den Overflow hier zulassen.
+div.paket-box-zielseite {
+    overflow: visible;
+    .paket-box {
+        margin: {
+            top: 0px;
+            bottom: 0px;
+        }
+    }
+}
+
+
+
+
+// #################### Team - Portrait-Boxen ####################
+
+div.portrait {
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease-in-out;
+    div.ce_image.portrait2 {
+        position: absolute;
+        top: 0px;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out 0.15s;
+    }
+    div.ce_list {
+        position: absolute;
+        min-width: 100%;
+        bottom: -100%;
+        padding: remcalc(20);
+        background-color: rgba($lic-secondary2,0.7);
+        transition: bottom 0.75s ease-in-out 0.15s;
+        h5 {
+            color: #ffffff;
+        }
+        li {
+            left: emcalc(12, 16);
+            padding-top: 0px;
+            padding-right: emcalc(12, 16);
+            @include li-fontsize(16);
+            @include li-line(20);
+            color: #ffffff;
+        }
+        li::before {
+            left: emcalc(-12, 16);
+            font: {
+                family: $font-basis;
+                weight: $font-regular;
+            }
+            content: "–";
+            color: #ffffff;
+        }
+    }
+}
+div.portrait:hover,
+div.portrait:focus {
+    box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+    div.ce_image.portrait2 {
+        opacity: 1;
+    }
+    div.ce_list {
+        bottom: 0px;
+    }
+}
+
+
+// Team - Teil werden
+div.teil-werden-box {
+    position: relative;
+    height: remcalc(470);
+    padding: {
+        top: remcalc(65);
+        right: remcalc(20);
+        left: remcalc(20);
+    }
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    background: $lic-verlauf3;
+    h2 {
+        color: #ffffff;
+    }
+}
+div.teil-werden-box::after {
+    position: absolute;
+    display: block;
+    width: remcalc(470);
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-image: url("/files/lithop/team/lithopper-werden.jpg");
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    content: "";
+}
+div.teamfacts {
+    border-radius: 4px;
+    padding: {
+        top: remcalc(33);
+        right: remcalc(20);
+        bottom: remcalc(33);
+        left: remcalc(20);
+    }
+    margin: {
+        top: 10px;
+        bottom: 10px;
+    }
+    background-color: #ffffff;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+}

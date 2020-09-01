@@ -1,0 +1,55 @@
+// Medium devices (tablets, less than 992px) | Bootstrap md-
+/*@media (max-width: 991.98px) { ... }*/
+@media (max-width: 991.98px) {
+
+// #################### Wordcloud in Artikelstreifen ####################
+.mod_article.wordcloud {
+    figure {
+        margin: {
+            top: remcalc(-46);
+            bottom: remcalc(-46);
+        }
+        svg {
+            height: remcalc(487);
+        }
+    }
+}
+
+
+
+
+// #################### Home Einleitung ####################
+.info-box {
+    height: 420px;
+}
+
+
+
+
+// #################### Portfolio-Seiten, Artikel-Teaser-Liste mit neuer Section ####################
+article.mod_article.portfolio-teaser {
+    max-height: 481px;
+    width: calc(50% - 20px);
+}
+
+
+
+
+// #################### Team-Seite ####################
+
+div.teil-werden-box {
+    height: inherit;
+    padding-bottom: remcalc(65);
+    h2 {
+        br {
+            display: none;
+        }
+    }
+}
+div.teil-werden-box::after {
+    display: none;
+}
+
+
+// Ende Media-Query
+}

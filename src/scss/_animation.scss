@@ -1,0 +1,102 @@
+// Toplink
+
+@keyframes li-toplink {
+    0%  {transform: rotate(-90deg); right: -200px;}
+    25% {right: remcalc(65);}
+    75% {right: remcalc(65);}
+    100%  {transform: rotate(0deg); right: remcalc(65);}
+  }
+  @keyframes li-toplink-out {
+    0%  {transform: rotate(0deg); right: remcalc(65);}
+    25% {transform: rotate(90deg);}
+    75% {transform: rotate(90deg);}
+    100%  {transform: rotate(-90deg); right: -200px;}
+  }
+
+
+// Formulare
+
+@keyframes li-formfeld {
+    0%   {box-shadow: 0 0 3px 0px $lic-primary2;}
+    50%   {box-shadow: 0 0 10px 0px $lic-primary2;}
+    100%   {box-shadow: 0 0 3px 0px $lic-primary2;}
+}
+@keyframes li-formfeld-error {
+    0%   {box-shadow: 0 0 3px 0px $lic-secondary5;}
+    50%   {box-shadow: 0 0 6px 0px $lic-secondary5;}
+    100%   {box-shadow: 0 0 3px 0px $lic-secondary5;}
+}
+
+
+// SVG
+
+div.svg-animate:hover {
+  overflow: visible;
+  svg.gruendung-i {
+    animation-name: li-rakete;
+    animation-duration: 0.25s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes li-rakete {
+  99% {transform: translate(200px, -200px);}
+  100% {opacity: 0;}
+}
+
+
+// Paket-Boxen-Welle
+
+.paket-box {
+  .ce_image {
+    figure {
+      svg {
+        path.wave-2 {
+          animation-name: paket-welle-2;
+          animation-duration: 6s;
+          animation-iteration-count: infinite;
+        }
+        path.wave-1 {
+          animation-name: paket-welle-1;
+          animation-duration: 4s;
+          animation-iteration-count: infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes paket-welle-2 {
+  0% {transform: translateX(0px);}
+  50% {transform: translateX(-10px) scale(1.3);}
+  100% {transform: translateX(0px) scale(1.0);}
+}
+@keyframes paket-welle-1 {
+  0% {transform: translateX(0px);}
+  50% {transform: translateY(9px) rotate(6deg) scale(0.92);}
+  100% {transform: translateX(0px) rotate(0deg) scale(1.0);}
+}
+
+
+
+
+// #################### Allgemeine Animationen ####################
+
+.blink.animated {
+  animation-name: blinken;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blinken {
+  0% {}
+  10% {transform: scale(1);}
+  13% {transform: scale(1.02);}
+  16% {transform: scale(0.98);}
+  19% {transform: scale(1.02);}
+  22% {transform: scale(0.98);}
+  25% {transform: scale(1.02);}
+  28% {transform: scale(1);}
+  100% {}
+}

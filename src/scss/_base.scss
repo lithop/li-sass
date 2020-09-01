@@ -1,0 +1,953 @@
+/*
+// grid-test
+.li-grid {
+  border: solid 2px;
+  border-color: red;
+}
+*/
+
+/*
+// Funktionstest SCSS-Funktionen und -Mixins
+.test {
+  margin-left: remcalc(19);
+  margin-top: remcalc(16);
+  padding-left: emcalc(16, 19);
+  @include li-fontsize(19);
+  @include li-line(24);
+  @include li-marginreset;
+  @include li-paddingreset;
+}
+*/
+
+
+
+
+// #################### Grundeinstellungen ####################
+
+// Box-Modell umstellen (Padding und Border nach innen berechnen, Grösse ändert nicht wegen Border oder Padding)
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// Root-Element auf Standard fixieren, Benutzerdefinierte Browsereinstllungen sind ausser Kraft gesetzt
+:root {
+  font-size: 16px;
+}
+
+html {
+  /* Basis-Schriftgrösse, -Zeilenabstand und Laufweite */
+  // Achtung: Schriftgrösse muss hier 100% sein, ansonsten werden rem nicht mit 16px umgerechnet (alles grösser oder kleiner)
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.263157894737; // identischer Faktor wie p
+  /* Ligaturen */
+  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
+  /* Zeichenglättung */
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  //text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+  /* Overflow */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+body {
+  font: {
+    family: $font-basis;
+    weight: $font-regular;
+    style: normal;
+    size: 118.75%; // Unsere Standardgrösse p erst ab hier, nie bei html
+  }
+  line-height: 126.3157894737%;
+  @include li-fontsize(19); // Schriftgrösse mit px und rem
+  // @include li-line(24); // Basis-ZAB in Prozent belassen, keine px und rem angeben
+  letter-spacing: normal;
+  color: $lic-primary3;
+  background-color: $lic-grau1;
+  margin: 0px;
+  padding: 0px;
+}
+
+// Auswahlfarbe
+::selection {
+  background-color: $lic-icons;
+}
+
+
+
+
+// #################### Contao-Anpassungen für Bootsrap-Flexbox ####################
+
+// Contao setzt bei fast allen Elementen die Klasse block und der Layoutbuilder setzt dort den overflow auf hidden. Dies verträgt sich nicht mit Bootstrap und unseren Schatten bei fast allen Elementen.
+// Bei Elementen mit margin funktioniert der Schatten. Damit nicht überall ein margin oder der overflow bei allen Contao-Block-Elementen global auf visible gesetzt werden muss, setzen wir nur die von Bootstrap umschliessenden row und das erste Kindelement (im Normalfall ein Spaltenset) auf overflow visible.
+// Dafür muss nun ggf. manuell bei Elementen der overflow auf hidden oder ein margin gesetzt werden.
+/* div.container .block {
+  overflow: hidden;
+} */
+div.container .row, div.container .row.block {
+  overflow: visible;
+  > * {
+    overflow: visible;
+  }
+}
+
+
+// Contao-Textblöcke innerhalb Bootstrap-Containern immer erst mal auf overflow hidden setzen, auch wenn Elternelemente wegen den Schatten auf overflow visible gesetzt wurden.
+div.container .ce_text.block {
+  overflow: hidden;
+}
+
+
+// Bilder innerhalb Bootstrap-Containern standardmässig als Block-Element
+div.container img, div.container svg, div.container image {
+//figure img {
+  display: block;
+  overflow: hidden;
+}
+/* Wir haben alle Fallbacks entfernt
+div.container svg image {
+  display: block;
+  overflow: hidden;
+}
+*/
+
+/**
+ * Automatically clear the floats in the main column, so you do not have to add
+ * a clearing div to each article
+ */
+ #main .inside {
+	overflow: hidden;
+}
+
+
+
+
+// ############################################################
+// #################### Lithop-Thema ####################
+
+// Seiten ohne Fusszeile und ohne Kopfbereich
+body.kein-fuss {
+  #footer {
+    display: none;
+  }
+}
+
+
+// Innenabstände bei Seiten mit fixiertem Kopfbereich
+body.header-kopf-fix {
+  #container #main div.inside { // für IE11 korrigiert
+    margin-top: 152px; // Header-Höhe wegen IE11 hier als margin
+    padding-top: 713px; // Höhe von #main (Header) hier abziehen
+    overflow: visible; // für rollende Hero-Bilder angepasst
+  }
+  #container #main.fixiert1 div.inside { // für IE11 korrigiert
+    margin-top: 120px; // Header-Höhe wegen IE11 hier als margin
+    padding-top: 745px; // Höhe von #main (Header) hier abziehen
+  }
+}
+
+
+// Alle Artikel und Footer bei Seiten mit fixiertem Kopfbereich über den Kopfbereich stellen
+body.header-kopf-fix div.kopf-fix ~ div.mod_article {
+  position: relative;
+}
+body.header-kopf-fix {
+  div.kopf-fix {
+  height: 865px;
+  }
+}
+body.header-kopf-fix footer {
+  position: relative;
+}
+// Verlauf und Farbe für Header
+body.header-kopf-fix #header {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1.00) 0%,rgba(255,255,255,0.01) 100%);
+}
+body.header-kopf-fix #header.fixiert1 {
+  background-color: rgb(255,255,255);
+  background: #ffffff;
+}
+// Fixierter Kopfbereich - Hero-Slider und Hero-Bilder
+div.kopf-fix {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+
+// Rollender Kopfbereich bzw. rollende Hero-Bilder - z.B. bei Portfolio-Teaser und -Artikel
+div.kopf-rollen {
+  position: absolute;
+  height: 865px;
+  top: 0px;
+  width: 100%;
+}
+div.kopf-rollen ~ div.kopf-abstand {
+  padding-top: 865px;
+}
+
+
+// Schriftdefinitionen - Titel, Grundschrift, Listen usw.
+
+h1,h2,h3,h4,h5,h6,p,pre,blockquote,table,ol,ul {
+  font: {
+    family: $font-basis;
+    weight: $font-regular;
+    style: normal;
+  }
+  color: $lic-primary3;
+  @include li-fontsize(19);
+  @include li-line(24);
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Wenn Contao Schrift abschneidet aktivieren
+p,pre,blockquote,table,ol,ul,h1,h2,h3,h4,h5,h6,fieldset {
+  padding-right: 1px;
+  padding-left: 1px
+}
+*/
+
+h1 {
+  font: {
+    family: $font-basis;
+    weight: $font-black;
+    style: normal;
+  }
+  color: $lic-primary3;
+  letter-spacing: -0.8px;
+  @include li-fontsize(60);
+  @include li-line(75);
+  margin-bottom: remcalc(65);
+}
+
+// h2 und Titel bei OnPage-Navi
+h2, div.onpage-navi p em {
+  font: {
+    family: $font-basis;
+    weight: $font-black;
+    style: normal;
+  }
+  color: $lic-primary3;
+  letter-spacing: -0.8px;
+  @include li-fontsize(45);
+  @include li-line(56);
+  margin-bottom: remcalc(65);
+}
+
+h3, p.portfolio-teaser-titel, fieldset.titel > legend {
+  font: {
+    family: $font-basis;
+    weight: $font-black;
+    style: normal;
+  }
+  color: $lic-primary3;
+  letter-spacing: -0.8px;
+  @include li-fontsize(33);
+  @include li-line(41);
+  margin-bottom: remcalc(33);
+}
+
+// h4 und grosse Lead-Texte
+h4, .ce_text.lead-gross p, p.lead-gross {
+  font: {
+    family: $font-basis;
+    weight: $font-regular;
+    style: normal;
+  }
+  color: $lic-primary3;
+  letter-spacing: 0px;
+  @include li-fontsize(25);
+  @include li-line(31);
+  margin-bottom: remcalc(33);
+}
+
+// Bei grossen Leadtexten den Abstand nach entfernen
+.ce_text.lead-gross p, p.lead-gross {
+  margin-bottom: 0px;
+}
+
+h5 {
+  font: {
+    family: $font-basis;
+    weight: $font-black;
+    style: normal;
+  }
+  color: $lic-primary3;
+  letter-spacing: 0px;
+  @include li-fontsize(19);
+  @include li-line(24);
+  margin-bottom: remcalc(6); // Viertel Leerzeile
+}
+
+// h6 und Bildunterschrift bei grossen Referenzen
+h6, div.grosse-referenz figcaption {
+  font: {
+    family: $font-basis;
+    weight: $font-regular;
+    style: normal;
+  }
+  color: $lic-primary3;
+  letter-spacing: 0px;
+  @include li-fontsize(16);
+  @include li-line(20);
+  margin-bottom: 0px;
+}
+
+// Auszeichnung fett
+strong {
+  font: {
+    family: $font-basis;
+    weight: $font-black;
+    style: normal;
+  }
+}
+
+// Auszeichnung kursiv
+em {
+  font-weight: $font-italic;
+  font-style: italic;
+}
+
+// horizontale Linien
+hr, .li-trennlinie {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border: 0;
+  background: linear-gradient(135deg, #F4F4F8 0%, #E0E0E5 49.98%, #F4F4F8 100%, #F4F4F8 100%);
+}
+
+
+
+
+// #################### Basis-Links ####################
+
+// gepunktete Linien um Links entfernen
+a:link, a:visited, a:hover, a:active, a:focus {
+  outline: none;
+}
+
+// Basis-Formatierung
+a, a:visited {
+  display: inline-block;
+  text-decoration: none;
+  font: {
+    family: $font-basis;
+    weight: $font-black;
+    style: normal;
+  }
+  color: $lic-primary1;
+  transition: all 0.2s ease;
+}
+a:hover {
+  color: $lic-primary3;
+  text-decoration: underline;
+}
+a:active {
+  color: $lic-primary3;
+  text-decoration: underline;
+}
+a:focus {
+    color: $lic-primary3;
+    text-decoration: underline;
+}
+a::before {
+    display: inline-block;
+    font: {
+      family: $font-icon;
+      weight: $font-icon-w;
+    }
+    padding-right: emcalc(3, 16);
+    content: "\f061";
+    transition: all 0.2s ease;
+  }
+
+// Alle Telefon-Links
+a[href^="tel"]::before {
+  content: "\f095";
+}
+
+// Alle Mail-Links
+a[href^="mailto"]::before {
+  content: "\f1d8";
+}
+
+// Alle Termin-Links
+a[title*="Termin"]::before, a[title*="termin"]::before {
+  content: "\f073";
+}
+
+// Alle Zurück-Links
+a[title="Zurück"]::before, a[title="zurück"]::before {
+  content: "\f060";
+}
+
+// Links bei grossen Lead-Texten
+.ce_text.lead-gross p, p.lead-gross {
+  transition: all 0.2s ease;
+  a::before {
+    color: $lic-primary2;
+  }
+  a:hover, a:active, a:focus, a:hover::before {
+    color: $lic-icons;
+  }
+}
+
+// Bild-Links
+figure {
+  a {
+  margin: 0px;
+  padding: 0px;
+  }
+  a:visited, a:hover, a:active, a:focus {
+    text-decoration: none;
+  }
+  a::before {
+    display: none;
+  }
+}
+
+// Text-Links ohne Pfeil und nicht Hellblau, nur unterstrichen
+a.li-text-link {
+  color: $lic-primary3;
+  text-decoration: underline;
+}
+a.li-text-link:hover, a.li-text-link:active, a.li-text-link:focus {
+  color: $lic-primary1;
+}
+a.li-text-link::before {
+  display: none;
+}
+
+// SEO-Links im Text
+a.li-seo-link {
+  color: inherit;
+}
+a.li-seo-link::before {
+  display: none;
+}
+
+
+
+// #################### Basis-Listen ####################
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  li {
+    position: relative;
+    float: none;
+    clear: both;
+    left: emcalc(29, 19);
+    padding-top: remcalc(6); // Viertel Leerzeile
+    padding-right: emcalc(29, 19); //Versatz berücksichtigen
+  }
+  li:first-child {
+    padding-top: 0px;
+  }
+  li::before {
+    display: block;
+    position: absolute;
+    float: left;
+    left: emcalc(-29, 19);
+    font: {
+      family: $font-icon;
+      weight: $font-icon-w;
+    }
+    color: $lic-primary1;
+    content: "\f058";
+  }
+}
+
+ol {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: decimal;
+  li {
+    margin-left: emcalc(29, 19);
+    padding-top: remcalc(6); // Viertel Leerzeile
+    padding-right: emcalc(29, 19); //Versatz berücksichtigen
+  }
+  li:first-child {
+    padding-top: 0px;
+  }
+}
+
+// Hellblaue Liste
+.liste-hellblau {
+  ul {
+    li::before {
+      color: $lic-primary2;
+    }
+  }
+}
+
+
+
+
+// #################### Spezielle Text-/Titelformatierungen ####################
+
+// Titelformatierungen
+.li-home-haupttitel {
+  h1 {
+    margin-bottom: remcalc(33);
+    em {
+      font-weight: $font-black;
+      font-style: normal;
+      color: $lic-primary1;
+    }
+  }
+}
+.li-home-untertitel {
+  p {
+    @include li-fontsize(33);
+    @include li-line(41);
+    margin-bottom: 0px;
+  }
+}
+
+// Paketseiten h5 im Ablauf Runde 1, 2 usw.
+div.ce_text.paket-ablauf {
+  h5 {
+    color: $lic-primary2;
+  }
+  h5::before {
+    display: inline-block;
+    margin-right: remcalc(10);
+    font: {
+      family: $font-icon;
+      weight: $font-icon-w;
+    }
+    color: $lic-primary2;
+    content: "\f01e";
+  }
+}
+
+// Paketseiten, Zusatzoptionen
+div.zusatzoption {
+  overflow: visible;
+  margin-bottom: 10px;
+  ul {
+    padding: remcalc(20);
+    background-color: #ffffff;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    li::before {
+      color: $lic-primary2;
+      content: "\f067";
+    }
+  }
+}
+
+// zu lange Texte gekürzt ausgeben
+.li-kuerzen {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// autom. Silbentrennung
+.li-trennung {
+  hyphens: auto;
+}
+
+
+
+
+// #################### SVG als normale img-Tags für IE bugfixen ####################
+div.ie-svg {
+  figure {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+
+
+
+// #################### Grosse Referenzen (Zufallsartikel) ####################
+
+// Textdefinition der figcaption bei h6
+div.grosse-referenz {
+  div.ce_image {
+    text-align: center;
+  }
+}
+
+
+
+
+// #################### Kundenstimmen-Seiten (Slider-Kundenstimmen sind unter _slider.scss definiert) ####################
+
+div.kundenstimmen-seiten {
+  div.ce_text {
+    padding: {
+      top: remcalc(65);
+      bottom: remcalc(65);
+    }
+    p {
+      hyphens: auto;
+    }
+    figure {
+      margin-bottom: remcalc(33);
+      img {
+        height: remcalc(40);
+        width: auto;
+      }
+    }
+    h2 {
+      margin-bottom: remcalc(65);
+      //hyphens: auto;
+    }
+  }
+}
+
+
+
+
+// #################### Akkordeon-Einleitung (Icon, Titel, Text) Hirnfutter ####################
+
+div.akkorderon-einleitung {
+  text-align: center;
+  .ce_image {
+    display: inline-block;
+    figure {
+      height: remcalc(80);
+      svg {
+        //width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .ce_text {
+    h2 {
+      margin: {
+        top: remcalc(33);
+        bottom: remcalc(10);
+      }
+    }
+    p {
+      margin-bottom: remcalc(55);
+    }
+  }
+}
+
+
+
+
+// #################### Portfolio-Seiten, Artikel-Teaser-Liste mit neuer Section ####################
+
+section.li-grid-start {
+  position: relative;
+  background-color: $lic-grau1;
+}
+
+article.mod_article.portfolio-teaser {
+  display: block;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  max-height: 500px;
+  width: calc(33.333333% - 20px);
+  margin: 10px;
+  padding: 0px;
+  border-radius: 4px;
+  box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  div.portfolio-teaser-link {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 4px;
+    p.more {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+      }
+    }
+    a::before {
+      display: none;
+    }
+    a:active, a:hover, a:focus {
+      //box-shadow: none;
+      text-decoration: none;
+    }
+  }
+  div.portfolio-teaser-aufhellung {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.95) 50.21%, rgba(255,255,255,0) 100%);
+  }
+  // Definition Schriftgrösse usw. unter h3
+  p.portfolio-teaser-titel {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: {
+      top: remcalc(65);
+      right: remcalc(20);
+      left: remcalc(20);
+    }
+  }
+  p {
+    img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    }
+  }
+}
+// Hover bei Teasern
+article.mod_article.portfolio-teaser:hover {
+  transform: scale(1.02);
+  box-shadow: 0 3px 25px 0 rgba(0,0,0,0.08), 0 15px 25px -15px rgba(0,0,0,0.3);
+}
+div.ce_teaser.portfolio-teaser.li-mousedown.active,
+article.mod_article.portfolio-teaser.li-mousedown.active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 15px 0 rgba(0,0,0,0.28), 0 15px 15px -15px rgba(0,0,0,0.5);
+}
+
+
+
+
+// #################### Google-Maps-Bereich ####################
+
+div.li-maps {
+  margin-bottom: remcalc(-6);
+  iframe {
+    width: 100%;
+    height: remcalc(720);
+  }
+}
+
+
+
+
+// #################### Detailtexte ein-/ausblenden (vor allem bei Website Banner Preisrechner verwendet) ####################
+
+div.detailbox { // optionale umschliessende Box
+  padding: remcalc(20);
+  border: {
+      top: 1px solid $lic-grau2;
+      right: 0px solid;
+      bottom: 1px solid $lic-grau2;
+      left: 0px solid;
+  }
+}
+p.detail {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+p.detail::before {
+  display: inline-block;
+  font: {
+    family: $font-icon;
+    weight: $font-icon-w;
+  }
+  color: $lic-primary1;
+  padding-right: emcalc(6, 16);
+  content: "\f05a";
+}
+p.detail.ein {
+  margin-bottom: remcalc(24);
+}
+p.detail.ein::before {
+  color: $lic-secondary5;
+  content: "\f057";
+}
+p.detailtext {
+  display: none;
+  cursor: pointer;
+  strong {
+      display: block;
+      margin-bottom: remcalc(6);
+  }
+}
+
+
+
+
+// #################### Tabelle und Inhalte bei Website Banner Preisrechner ####################
+
+div.ce_table.bannerpreise {
+  margin-top: remcalc(65);
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: remcalc(24);
+    tr {
+      background-color: $lic-grau2;
+      border-top: 1px solid #ffffff;
+      border-right: 0px solid;
+      border-bottom: 1px solid #ffffff;
+      border-left: 0px solid;
+      td {
+        padding: remcalc(10);
+        width: 70%;
+      }
+      td.col_last,
+      th.col_last {
+        text-align: right;
+        width: 30%;
+      }
+      td#totaltext,
+      td#total {
+        font-weight: $font-black;
+      }
+    }
+    tr.rabattzeile {
+      display: none;
+      td {
+        font-weight: $font-italic;
+        font-style: italic;
+      }
+    }
+    tr.konzeptzeile {
+      display: none;
+    }
+    thead {
+      tr {
+        border: 0px solid;
+        background-color: transparent;
+        th {
+          width: 70%;
+          padding-bottom: remcalc(6);
+        }
+        th.col_last {
+          @include li-fontsize(16);
+          padding-right: remcalc(10);
+          width: 30%;
+        }
+      }
+    }
+    tfoot {
+      tr {
+        border: 0px solid;
+        background-color: $lic-primary2;
+        td {
+          font-weight: $font-black;
+        }
+      }
+    }
+    span.tabellentext-klein {
+      @include li-fontsize(16);
+      display: inline-block;
+    }
+  }
+}
+
+
+// Formularbereich für Konzepteingabe zu Beginn ausblenden
+div#konzepteingabe {
+  display: none;
+}
+
+
+// Totalbalken oben fixiert
+div#totalbalken {
+  opacity: 0;
+  position: fixed;
+  display: none;
+  top: -92px;
+  left: 0;
+  width: 100%;
+  background-color: $lic-primary2;
+  padding: 0px;
+  transition: all 0.4s ease;
+  table {
+    display: none;
+    width: 100%;
+    tr {
+      border: 0px solid;
+      td {
+        width: 70%;
+        padding: remcalc(10);
+        font-weight: $font-black;
+      }
+      td.col_last {
+        width: 30%;
+        text-align: right;
+      }
+    }
+  }
+}
+// einblenden, wenn Header klein gescrollt ist
+div#container {
+  main.fixiert1 {
+    div#totalbalken {
+      opacity: 1;
+    }
+    div#totalbalken.zeigen {
+      top: 92px; //fixer Wert muss hier sein
+      table {
+        display: table;
+      }
+    }
+  }
+}
+
+
+
+
+// #################### Icons am Seitenanfang - Error-Seiten ####################
+
+div.kopf-icon-zentriert {
+  display: block;
+  text-align: center;
+  figure {
+    display: inline-block;
+    img {
+      height: remcalc(60);
+      width: auto;
+    }
+  }
+  h1 {
+    margin: 0px;
+  }
+}
+
+
+
+
+// #################### Bootstrap-Anpassungen ####################
+
+// Bei umschlissender row oben/unten Minus-Margin, wenn divs mit Margin oben/unten enthalten sind (z.B. fortlaufende Boxen wie home-dienstleistungen). So wird der überschüssige Raum oben/unten beim Artikel ausgeglichen.
+.row.minusmargin {
+  margin: {
+    top: -10px;
+    bottom: -10px;
+  }
+}
+
+
+
+// #################### Basic Images ####################
+
+.ce_image {
+  &.border {
+  border-radius: 4px;
+  border: solid 1px $lic-primary3;
+  box-shadow: 2px 2px 0px $lic-primary3;
+  }
+}

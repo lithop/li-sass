@@ -1,0 +1,39 @@
+{
+  "name": "li-sass",
+  "version": "2.0.0",
+  "description": "A Production-ready build process with autoprefixer and ftp-deploy",
+  "author": "Lithop Electronic Media AG",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/cli.git"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "clean:dist": "rm -r dist/*",
+    "deploy:ftp": "node deploy",
+    "compile:nested": "node-sass src/scss -o dist/css --output-style nested",
+    "compile:compressed": "node-sass src/scss -o dist/css --output-style compressed",
+    "compile:watch": "node-sass src/scss -o dist/css --output-style nested -w -r",
+    "css:prefix": "postcss dist/css --no-map -u autoprefixer -d dist/css",
+    "rename:minified": "renamer --path-element ext --find css --replace 'min.css' 'dist/**'",
+    "build": "npm-run-all clean:dist compile:compressed css:prefix rename:minified",
+    "develope": "npm-run-all clean:dist compile:nested compile:watch",
+    "deploy": "npm-run-all build deploy:ftp"
+  },
+  "devDependencies": {
+    "caniuse-lite": "^1.0.30001122",
+    "dotenv": "^8.2.0",
+    "ftp-deploy": "^2.3.7",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "node-sass": "^4.14.1",
+    "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.2",
+    "renamer": "^2.0.1"
+  }
+}

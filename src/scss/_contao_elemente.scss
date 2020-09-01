@@ -1,0 +1,551 @@
+
+// #################### Toplink ####################
+.ce_toplink {
+  display: block;
+  width: 100%;
+  text-align: right;
+  overflow: hidden;
+  color: #ffffff;
+  margin-bottom: remcalc(9);
+  a, a:visited, a:hover, a:active, a:focus {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  a::before {
+    content: "\f062";
+    @include li-fontsize(45);
+    //@include li-line(56);
+    line-height: 1.3333333333;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+
+// fixierter Toplink
+#toplink-fix {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: -200px;
+  bottom: remcalc(65);
+  width: remcalc(80);
+  height: remcalc(80);
+  margin: 0px;
+  border-radius: remcalc(40);
+  background-color: $lic-grau2;
+  transform: rotate(-90deg);
+  opacity: 0.6;
+  z-index: 110;
+}
+#toplink-fix.start {
+  display: none;
+}
+#toplink-fix.animated {
+  animation-name: li-toplink;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+#toplink-fix.out {
+  animation-name: li-toplink-out;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+
+
+
+// #################### Brotkrümel ####################
+
+.mod_breadcrumb.li-breadcrumb {
+  margin-bottom: remcalc(65);
+  ul {
+    display: block;
+    width: 100%;
+    float: left;
+    @include li-fontsize(16);
+    @include li-line(20);
+    color: $lic-primary3;
+    li {
+      display: inline-block;
+      position: inherit;
+      padding: 0px;
+      left: 0px;
+      margin-right: remcalc(5);
+    }
+    li::before {
+      display: inline-block;
+      position: inherit;
+      margin-right: remcalc(5);
+      font: {
+        family: $font-icon;
+        weight: $font-icon-w;
+      }
+      color: $lic-primary1;
+      content: "\f0da";
+    }
+    li.active::before {
+      color: $lic-primary3;
+    }
+    a:visited {
+      color: $lic-primary1;
+    }
+    a:hover, a:active, a:focus {
+      color: $lic-primary3;
+    }
+    a::before {
+      display: none;
+    }
+  }
+}
+
+// Bei Artikel-Detailansichten den aktuellen Seitentitel weglassen
+.mod_breadcrumb.li-breadcrumb.li-breadcrumb-kurz {
+  ul {
+    li.active.last {
+      display: none;
+    }
+  }
+}
+
+
+
+// #################### Akkordeon ####################
+
+section.ce_accordion.ce_text.block, section.ce_accordion.block {
+  overflow: visible; // Wegen Schatten
+}
+section.ce_accordion {
+  div {
+    outline: none; // gepunktete Linie entfernen
+  }
+}
+section.ce_accordion {
+  background-color: #ffffff;
+  box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+  margin: {
+    top: remcalc(10);
+    right: 0px;
+    bottom: remcalc(10);
+    left: 0px;
+  }
+  div.ui-accordion-header {
+    position: relative;
+    width: 100%;
+    padding: {
+      top: remcalc(33);
+      right: remcalc(102);
+      bottom: remcalc(33);
+      left: remcalc(20);
+    }
+    @include li-fontsize(33);
+    @include li-line(41);
+    font-weight: $font-black;
+    letter-spacing: -0.8px;
+    cursor: pointer;
+    span {
+      display: block;
+      position: absolute;
+      width: 32px;
+      height: 17px;
+      right: remcalc(19);
+      top: remcalc(45);
+      //background-image: url("/files/lithop/img/akkordeon-pfeil.svg.png"); // Simpler Fallback für alte Browser
+      background-image: url("/files/lithop/img/akkordeon-pfeil.svg"); // Moderne Browser laden das SVG darüber
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% auto;
+      transition: transform 0.3s ease;
+    }
+  }
+  div.ui-accordion-header.active {
+    span {
+      transform: rotate(180deg);
+    }
+  }
+  div.ui-accordion-content {
+    padding: {
+      top: remcalc(33);
+      right: remcalc(20);
+      bottom: remcalc(33);
+      left: remcalc(20);
+    }
+    border: {
+      top: solid 1px;
+      color: $lic-grau2;
+    }
+  }
+}
+
+
+// SEO-Akkordeon-Anpassungen
+section.seo-akkordeon {
+  box-shadow: none;
+  background-color: $lic-grau1;
+  box-shadow: 0 1px 0 0 $lic-grau2, 0 -1px 0 0 $lic-grau2;
+  margin: 0px;
+  div.ui-accordion-header {
+    margin: 0px;
+    padding: {
+      top: remcalc(19);
+      right: remcalc(72);
+      bottom: remcalc(19);
+    }
+    @include li-fontsize(19);
+    @include li-line(24);
+    font-weight: $font-regular;
+    letter-spacing: 0px;
+    span {
+      top: remcalc(23);
+    }
+  }
+  div.ui-accordion-content {
+    border: solid 0px;
+    padding-top: 0px;
+    padding-bottom: remcalc(19);
+    p, h5, li {
+      @include li-fontsize(16);
+      @include li-line(20);
+    }
+    h5 {
+      margin-bottom: remcalc(5);
+    }
+    li {
+      padding-top: remcalc(5);
+    }
+    blockquote {
+      margin-top: remcalc(20);
+      margin-bottom: 0px;
+    }
+  }
+}
+
+
+// Logo 1x1, platzierte Beispiellogos
+section.akkordeon-logos {
+  img {
+    display: inline-block;
+    margin-right: remcalc(33);
+    height: remcalc(65);
+    width: auto;
+  }
+  em {
+    img {
+      height: remcalc(33);
+    }
+  }
+}
+
+
+
+
+// #################### Suchformular und -seite ####################
+
+// Suche-Trigger in Head
+#head-suche-trigger {
+  float: right;
+  position: relative;
+  margin-top: 4px;
+  a {
+    color: $lic-primary3;
+  }
+  a:hover, a:active, a:focus, a:hover::before {
+    text-decoration: none;
+    color: $lic-icons;
+  }
+  a::before {
+    color: $lic-primary3;
+    display: inline-block;
+    font: {
+      family: $font-icon;
+      weight: $font-icon-w;
+    }
+    content: "\f002";
+    transition: all 0.2s ease;
+  }
+}
+
+// Such-Formular im Header, zurzeit nicht mehr aktiviert
+/*
+#head-suche {
+  display: none;
+  float: right;
+  position: relative;
+  overflow: visible;
+  // height: remcalc(24);
+  div.ce_form {
+    overflow: hidden;
+    // height: remcalc(24);
+    form {
+      margin: 0px;
+      div.formbody {
+        // height: remcalc(24);
+        div.widget-text {
+          margin: 0px;
+          float: left;
+            input {
+              // display: none;
+              width: 180px;
+              @include li-fontsize(16);
+              @include li-line(20);
+              // background-color: transparent;
+              background-color: #ffffff;
+              border: {
+                top: solid 0px;
+                right: solid 0px;
+                // bottom: solid 0px;
+                bottom: solid 1px;
+                left: solid 0px;
+                radius: 0px;
+              }
+              box-shadow: none;
+              padding: {
+                top: 6px;
+                right: 3px;
+                bottom: 6px;
+                left: 3px;
+              }
+            }
+            input:focus,
+            textarea:focus {
+              animation: none;
+            }
+        }
+        div.widget-submit {
+          float: left;
+          margin: {
+            top: 4px;
+            right: 0px;
+            bottom: 0px !important;
+            left: 10px;
+          }
+          input {
+            height: remcalc(23);
+            // outline: none;
+            background: none;
+            border-radius: 0px;
+            border: none;
+            padding: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+*/
+
+
+// Suche - Zielseite
+div.mod_search {
+  p.header {
+    margin-top: remcalc(65);
+    margin-bottom: remcalc(33);
+  }
+  div.even,
+  div.odd {
+    margin-top: remcalc(20);
+    margin-bottom: remcalc(20);
+    padding: {
+      top: remcalc(33);
+      right: remcalc(20);
+      bottom: remcalc(33);
+      left: remcalc(20);
+    }
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+    mark {
+      background-color: $lic-primary2;
+      padding: {
+        left: 3px;
+        right: 3px;
+      }
+    }
+    p.url {
+      margin-top: remcalc(33);
+      color: $lic-grau2;
+    }
+    h3 {
+      span {
+        @include li-fontsize(25);
+      }
+    }
+  }
+  div.even:hover,
+  div.odd:hover {
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(190, 220, 246, 0.1) 100%);
+    p.url {
+      color: $lic-primary2;
+    }
+  }
+}
+
+
+
+
+// #################### Vimeo-Video ####################
+
+.ce_vimeo {
+  display: block;
+  float: left;
+  overflow: visible;
+  width: 300px;
+  margin: {
+    top: remcalc(33);
+    right: 10px;
+    bottom: remcalc(33);
+    left: 0px;
+  }
+  h5 {
+    margin-bottom: remcalc(33);
+  }
+  iframe {
+    border-radius: 4px;
+    box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+  }
+  iframe {
+    transition: transform 0.3s ease;
+  }
+}
+.ce_vimeo:hover {
+  iframe {
+    transform: scale(1.02);
+  }
+}
+
+
+
+
+// #################### Download-Element ####################
+
+// Weitere spezielle Definitionen bei den CTA-Boxen in boxen.scss
+.ce_download {
+  p {
+    a {
+      span {
+        @include li-fontsize(16);
+      }
+    }
+    a::before {
+      display: none;
+    }
+  }
+}
+.ce_downloads {
+  li {
+    a {
+      span {
+        @include li-fontsize(16);
+      }
+    }
+    a::before {
+      display: none;
+    }
+  }
+}
+
+
+
+
+// #################### Artikelnavigation - Basis = Portfolio | Paginierung bei Suchseite ####################
+div.mod_articlenav,
+div.pagination { //pagination für Suchseite
+  overflow: visible;
+  margin: -10px;
+  ul {
+    li {
+      display: inline-block;
+      left: 0px;
+      padding: {
+        top: remcalc(15);
+        right: remcalc(20);
+        bottom: remcalc(15);
+        left: remcalc(20);
+      }
+      margin: 10px;
+      border: 1px solid $lic-primary1;
+      background-color: $lic-grau1;
+      box-shadow: 0 15px 20px -15px rgba(0,0,0,0.5);
+      a::before {
+        display: none;
+      }
+      a:active, a:hover, a:focus {
+        text-decoration: none;
+      }
+    }
+    li::before {
+      display: none;
+    }
+    li:hover, li.active {
+      background-color: $lic-primary1;
+      strong, a, span { //span nur für Suchseite
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+//pagination für Suchseite, Seite x von y
+div.pagination {
+  margin-bottom: remcalc(33);
+  > p {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: remcalc(23);
+    @include li-fontsize(16);
+    @include li-line(20);
+  }
+  > p::before {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border: 0;
+    background: linear-gradient(135deg, $lic-grau1 0%, $lic-grau2 49.98%, $lic-grau1 100%, $lic-grau1 100%);
+    margin-top: remcalc(140);
+    margin-bottom: remcalc(130);
+    content: " ";
+  }
+}
+
+
+
+
+// #################### Sitemap ####################
+
+div.mod_sitemap {
+  ul.level_1 {
+    li {
+      margin-top: remcalc(33);
+      left: 0px;
+    }
+    > li:first-of-type {
+      margin-top: 0px;
+    }
+    li::before {
+      display: none;
+    }
+  }
+  ul.level_2 {
+    li {
+      margin-top: 0px;
+      padding-top: remcalc(3);
+      left: remcalc(21);
+      a {
+        color: $lic-primary3;
+        font-weight: $font-regular;
+      }
+      a::before {
+        display: none;
+      }
+    }
+    li.first {
+      padding-top: remcalc(6);
+    }
+    li::before {
+      display: none;
+    }
+  }
+}

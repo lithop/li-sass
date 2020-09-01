@@ -1,0 +1,76 @@
+/* 
+Main SCSS
+Comment out source files if they are not required 
+*/
+
+// Fonts > Google-Schriften direkt im Contao-Backend definiert
+//@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,900,900i&display=swap');
+//@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,900&display=swap');
+
+// Configuration
+@import "variables";
+
+// Layout & components
+@import "base";
+@import "artikel_und_backgrounds";
+@import "boxen";
+@import "slider";
+@import "contao_elemente";
+@import "formulare";
+@import "header-footer";
+@import "navi";
+@import "animation";
+@import "abstand_leerzeile_floating"; // ganz am Schluss, damit Abstände immer überschrieben werden können
+
+// Responsive Layout-Korrekturen
+@import "korr-4"; // kleiner 1200px
+@import "korr-3"; // kleiner 992px
+@import "korr-2"; // kleiner 768px – hier greift auch die Contao-CSS-Datei «Responsive Layout» ein
+@import "korr-1"; // kleiner 576px
+@import "korr-0"; // Allgemeine Korrekturen ausserhalb Grid-Sprüngen
+
+// ############################################################
+/*
+Verweundung zusammen mit:
+– «bootstrap-4.3.1-dist» (nur CSS-Gridsystem) – li-bootstrap-grid.min.css über CMS eingbunden, beim Rastersystem wurden die Gaps von 30px auf 20px geändert.
+– «fontawesome-free-5.9.0-web» – solid.min.css über CMS eingebunden
+– Contao 4.4.x
+    – Diese Contao-CSS unbedingt ausschalten:
+        – 12-Spalten Grid
+
+Wir versuchen bis runter zu Microsoft Internet Explorer 10 kompatibel zu sein, fangen aber IE10 bereits ab. Ansonsten kompatibel zu allen modernen/aktullen Browsern (ausser ggf. Proxybrowser)
+
+Generell beachten:
+Bilder in variablen Flexboxen nicht verzerren
+– bei diesen <img> die «max-width: none;» setzen
+Z-Index
+– über 1000 wird von Bootstrap verwendet
+– unser Header steht auf 3000
+    – Hauptnavi-Overlay: 3010
+    – Hauptnavi, gesperrter Bereich: 3015
+    – Hauptnavi-Trigger: 3020
+– CTAs und Popups: 1000
+– IE-Overlay: 10000
+– fixierter Toplink: 110
+– Ansonsten alles -1, 0, 1
+– unsere normalen Items grundsätzlich unter 100 definieren
+REM
+– Nie Media Queries mit rem
+– Nie «Borders sized» mit rem
+Verläufe
+– CSS-Gradients nie von einer Farbe auf Transparent
+Flexboxes
+– flex: 0 0 100% -> flex: flex-grow flex-shrink flex-basis
+– position «absolute» deaktiviert «flex», sprich diese Elemente werden zu normalen Block-Elementen
+– Wenn innerhalb einer Flexbox ein div absolut positioniert wird, ist dieser kein flex-item mehr. Für die Anordnung mit z-index müssen bereits die übergeordneten Flexboxen einen z-index haben.
+– IE 10 benötigt alte Flexbox-Syntax (display: flexbox; statt display: flex;)
+– Standardwert bei IE 10 ist (0 0 auto) statt (0 1 auto) – deshalb auch bei Standard immer (flex: 0 1 auto) schreiben
+– Safari und Chrome: Block- oder nicht-Flex-Kindelemente innerhalb einer Flexbox erkennt keine Höhe in Prozent
+– IE 11: Elemente werden vertikal nicht richtig aliniert, wenn die Flexbox (min-height) verwendet. Lösung: umschliessende Flexbox mit column-direction (mit fester Höhe? [evtl. auch in Prozent möglich]).
+– IE 10-11: (flex-direction: column;) berechnet die Grössen der Kindelemente falsch, wenn der Container mit (min-height) aufgebaut wird.
+– IE 11 benötigt alle 3 Argumente (flex: 0 1 auto)
+– Wichtig: Wenn die Flexbasis (drittes Argument) 0 sein soll, dann nie 0px sondern immer 0% eingeben. Grund: Einige Minifier entfernen bei 0px den Wert und dann hat IE ein Problem.
+Problemlösungen
+– Problemlösung: Text in flex bei column-Eltern umbrechen = div.ce_text {width: 100%;}
+– Problemlösung mit Höhe bzw. Zeilenabstand bei ::before- und ::after-Elementen in IE11 = line-height: 1.333... (Faktor von Schriftgrösse statt Wertangabe)
+*/

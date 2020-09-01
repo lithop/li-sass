@@ -1,0 +1,103 @@
+// #################### Artikel Innenabstände oben/unten ####################
+
+// Standard-Artikel
+.mod_article {
+    padding-top: remcalc(65);
+    padding-bottom: remcalc(65);
+}
+
+// Kopf = Artikel, die mit einer Breadcrumb beginnen
+.mod_article.kopf {
+    padding-top: remcalc(33);
+    padding-bottom: remcalc(65);
+}
+
+// Plus Abstand oben gross
+.mod_article.a1 {
+    padding-top: remcalc(130);
+}
+
+// Plus Abstand oben entfernen
+.mod_article.a0 {
+    padding-top: remcalc(0);
+}
+
+// Oder Abstand oben UND unten entfernen
+.mod_article.a0-0 {
+    padding-top: remcalc(0);
+    padding-bottom: remcalc(0);
+}
+
+// h2 bei schmalen Artikel-Streifen mit kleinerem Abstand
+.streifen h2 {
+    margin-bottom: remcalc(33);
+}
+
+
+
+
+// #################### Fixierte Kopfbereiche ####################
+
+// Weitere Definitionen unter base.scss
+.mod_article.kopf-fix {
+    padding-top: remcalc(0);
+    padding-bottom: remcalc(0);
+}
+
+
+
+
+// #################### Artikel- und Section-Hintergründe ####################
+
+// Grundeinstellung: alle Artikel Hellgrau und Klasse für hellgraue DIVs
+.mod_article,
+div.hellgrau {
+    background-color: $lic-grau1;
+}
+.mod_article.keine-farbe {
+    background-color: transparent;
+    background: unset;
+}
+
+// Verlauf Firmenfarbe
+.mod_article.verlauf1 {
+    background: $lic-verlauf1;
+}
+
+// Verlauf Grün
+.mod_article.verlauf2 {
+    background: $lic-verlauf2;
+}
+
+// Dunkelgrau
+.mod_article.dunkelgrau {
+    background-color: $lic-grau2;
+}
+/*
+// Automatischer Wechsel Hellgrau/Dunkelgrau
+.mod_article.grauwechsel {
+    background-color: $lic-grau2;
+}
+.mod_article.grauwechsel:nth-of-type(2n) {
+    background-color: $lic-grau1;
+}
+*/
+
+
+
+
+// #################### Wordcloud in Artikelstreifen ####################
+
+.mod_article.wordcloud {
+    padding: 0px;
+    figure {
+        text-align: center;
+        margin: {
+            top: remcalc(-185);
+            bottom: remcalc(-185);
+        }
+        svg {
+            height: remcalc(765);
+        }
+    }
+}

@@ -1,0 +1,232 @@
+// #################### Contao Content-Slider ####################
+
+// Kundenstimmen
+div.ce_sliderStart.li-kundenstimme {
+    display: block;
+    .content-slider {
+        border-radius: 4px;
+        background: $lic-verlauf2;
+        box-shadow: 0 3px 15px 0 rgba(0,0,0,0.08), 0 15px 15px -15px rgba(0,0,0,0.3);
+        //height: 362px;
+        div.ce_text {
+            padding: {
+                top: remcalc(21);
+                right: remcalc(20);
+                bottom: remcalc(33);
+                left: remcalc(20);
+            }
+        }
+    }
+    nav.slider-control {
+        margin-top: remcalc(17);
+        height: remcalc(30);
+        .slider-menu {
+            @include li-fontsize(36);
+            @include li-line(36);
+        }
+        b {
+            display: inline-block;
+            margin: {
+                left: remcalc(3);
+                right: remcalc(3);
+            }
+            color: $lic-grau2;
+        }
+        b.active {
+            color: $lic-primary1;
+        }
+    }
+}
+.ce_text.kundenstimme {
+    p {
+        color: #ffffff;
+        margin: 0px;
+    }
+    .li-kunde-titel {
+        @include li-fontsize(25);
+        @include li-line(31);
+        font-weight: $font-black;
+    }
+    .li-kunde-untertitel {
+        @include li-fontsize(25);
+        @include li-line(31);
+        font-weight: $font-regular;
+    }
+    .li-kunde-untertitel::after {
+        display: block;
+        margin: {
+            top: remcalc(20);
+            right: remcalc(-20);
+            bottom: remcalc(33);
+            left: remcalc(-20);
+        }
+        height: 1px;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+        content: "";
+    }
+    .li-kunde-name {
+        @include li-fontsize(16);
+        @include li-line(20);
+        margin-top: remcalc(33);
+        font-weight: $font-regular;
+    }
+    a {
+        color: #ffffff;
+        transform: none;
+        transform: unset;
+    }
+    a::before {
+        color: #ffffff;
+        padding-right: emcalc(6, 16);
+        content: "\f518"
+    }
+}
+
+
+// Hero-Slider
+div.ce_sliderStart.li-hero {
+    .content-slider {
+        position: relative;
+        height: 865px;
+    }
+    div.home-slides-hg {
+        height: 865px;
+    }
+        div.textbereich-absolut {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        div.container {
+            overflow: visible; // wegen CTA-Schatten
+        }
+    }
+    nav.slider-control {
+        position: absolute;
+        visibility: hidden;
+        top: calc(100% - 2.8125rem);
+        height: remcalc(46);
+        width: 100%;
+        transition: all 0.75s ease-in-out;
+        a {
+            top: -410px;
+            @include li-fontsize(45);
+            @include li-line(45);
+        }
+        a:hover, a:active, a:focus {
+            text-decoration: none;
+        }
+        a.slider-prev {
+            left: -200px;
+        }
+        a.slider-next {
+            right: -200px;
+        }
+        a.slider-prev::before {
+            margin-left: remcalc(20);
+            content: "\f104";
+        }
+        a.slider-next::before {
+            margin-right: remcalc(20);
+            content: "\f105";
+        }
+        span.slider-menu {
+            b {
+                visibility: visible;
+                margin: {
+                    left: remcalc(3);
+                    right: remcalc(3);
+                }
+                color: $lic-grau2;
+                @include li-fontsize(41);
+                @include li-line(41);
+            }
+            b.active {
+                color: $lic-primary1;
+            }
+        }
+    }
+    // spezielle grosse CTA-Box im Slider ohne Abstand unten
+    .kopf-cta {
+        margin: 0px;
+    }
+    // Floating und Abstand im Hero-Slider-Bereich
+    .cta-button-container {
+        display: inline-flex;
+        width: inherit;
+        margin: {
+            top: remcalc(0);
+            right: remcalc(20);
+            bottom: remcalc(20);
+            left: 0px;
+        }
+    }
+    // Home-Slider, erstes Slide > Boxen werden mit JQuery gefadet
+    .home-fade {
+        opacity: 0;
+    }
+    .home-fade.ein {
+        opacity: 1;
+        transition: opacity 0.6s ease-in;
+    }
+}
+div.ce_sliderStart.li-hero:hover {
+    nav.slider-control {
+        visibility: visible;
+        a.slider-prev {
+            left: 0px;
+        }
+        a.slider-next {
+            right: 0px;
+        }
+    }
+}
+
+
+
+
+// #################### kleine Referenz-Slider ####################
+
+div.ce_sliderStart.referenz {
+    display: block;
+    text-align: center;
+    div.slider-wrapper {
+        background: $lic-grau2;
+        height: remcalc(188);
+        div.ce_image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            figure {
+                flex: 1 1 100%;
+                img {
+                    max-height: remcalc(148);
+                    max-width: remcalc(300);
+                }
+            }
+        }
+    }
+    nav.slider-control {
+        margin-top: remcalc(17);
+        height: remcalc(30);
+        .slider-menu {
+            @include li-fontsize(36);
+            @include li-line(36);
+        }
+        b {
+            display: inline-block;
+            margin: {
+                left: remcalc(3);
+                right: remcalc(3);
+            }
+            color: $lic-grau2;
+        }
+        b.active {
+            color: $lic-primary1;
+        }
+    }
+}

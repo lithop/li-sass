@@ -1,0 +1,109 @@
+/* globale Variablen */
+
+// #################### Schriften ####################
+// Hausschrift
+$font-basis: "Source Sans Pro", sans-serif;
+$font-regular: 400;
+$font-italic: 400; // plus font-style: italic definieren
+$font-black: 900;
+// $font-black-i: 900i; // plus font-style: italic definieren
+
+// Icons
+$font-icon: "Font Awesome 5 Free";
+$font-icon-w: 900;
+
+
+// #################### Farben ####################
+// Primary
+$lic-primary1: #333D99; //Firmenfarbe dunkel
+$lic-primary2: #BEDCF6; //Firmenfarbe hell
+$lic-primary3: #0F0F3C; //Dunke Auszeichnungs- und globale Schriftfarbe
+
+// Secondary
+$lic-secondary1: #639933; //Grün
+$lic-secondary2: #777307; //Olive
+$lic-secondary3: #FF3366; //Pink
+$lic-secondary4: #6C066F; //Violett
+$lic-secondary5: #A00000; //Rot
+$lic-secondary6: #007EA1; //Mint
+
+// Grautöne
+$lic-grau1: #F4F4F8;
+$lic-grau2: #E0E0E5;
+
+// Icons
+$lic-icons: #FF6F61; //Allgemeine Auszeichnungsfarbe
+
+// Verläufe
+$lic-verlauf1: linear-gradient(135deg, #333D99 0%, #0F0F3C 100%); //Verlauf Firmenfarbe dunkel
+$lic-verlauf2: linear-gradient(135deg, #639933 0%, #0F0F3C 100%); //Verlauf Grün
+$lic-verlauf3: linear-gradient(135deg, #777307 0%, #0F0F3C 100%); //Verlauf Olive
+$lic-verlauf4: linear-gradient(135deg, #FF3366 0%, #0F0F3C 100%); //Verlauf Pink
+$lic-verlauf5: linear-gradient(135deg, #6C066F 0%, #0F0F3C 100%); //Verlauf Violett
+$lic-verlauf6: linear-gradient(135deg, #A00000 0%, #0F0F3C 100%); //Verlauf Rot
+$lic-verlauf7: linear-gradient(135deg, #007EA1 0%, #0F0F3C 100%); //Verlauf Mint
+
+
+// ############################################################
+/* Funktionen und Mixins */
+
+// Pixel nach rem – Beispiel: margin-top: remcalc(16) wird zu margin-top: 1rem;
+@function remcalc($pixel) {
+    @return #{$pixel/16}rem;
+}
+
+// Pixel nach em – Beispiel: left: emcalc(29, 19) wird zu left: 1.5263157895em; em bezieht sich auf das direkte Elternelement, mit dieser Funktion werden Pixel in Abhängigkeit der Grösse des Elternelements (immer individuell schauen und übergeben) richtig ausgerechnet.
+@function emcalc($pixel, $basis) {
+    @return #{$pixel/$basis}em;
+}
+
+// Pixel nach rem mit Mixin für die richtige Ausgabe mit Pixel-Angabe sowie für moderne Browser mit rem-Angabe. Wird nur bei «font-size» und «line-height» so benötigt, bei anderen Elementen können auch die Explorer rem-Werte.
+// wegen Fehler bei Explorer 9-10 mit font und line-height (hiermit behoben).
+// Chrome/Android hat ohne dieser Lösung Probleme mit font-size und rem, wenn das Root-Element eine Schriftgrösse in Prozent hat (was ja fast immer der Fall ist).
+// Border-sizes nie in rem angeben, Chrome hat Darstellungsprobleme (bleibt auch mit dieser Lösung bestehen)
+// wegen iOS-Safari nie Media Queries mit rem erstellen. IPhone 4 und Safari 5.1 hat auch mit dieser Lösung ggf. Darstellungsprobleme beim Scrollen.
+@mixin li-fontsize($pixel) {
+    font-size: $pixel * 1px;
+    font-size: remcalc($pixel);
+}
+@mixin li-line($pixel) {
+    line-height: $pixel * 1px;
+    line-height: remcalc($pixel);
+}
+/*
+// Root-Element-Korrekturen. Sämtliche Pixel-Schriftdefinitionen bei korr-2 neu berechnen. Rem-Werte bleiben, da das Root-Element umgestellt wird.
+@mixin li-fontsize-mobile($pixel) {
+    font-size: $pixel * 0.8421052632px; // Faktor Root-Element = 16/19
+    font-size: remcalc($pixel);
+}
+@mixin li-line-mobile($pixel) {
+    line-height: $pixel * 0.8421052632px;
+    line-height: remcalc($pixel);
+}
+*/
+
+/*
+// Margin komplett nullen
+@mixin li-marginreset {
+    margin-top: 0px;
+    margin-top: 0rem;
+    margin-right: 0px;
+    margin-right: 0rem;
+    margin-bottom: 0px;
+    margin-bottom: 0rem;
+    margin-left: 0px;
+    margin-left: 0rem;
+}
+
+// Padding komplett nullen
+@mixin li-paddingreset {
+    padding-top: 0px;
+    padding-top: 0rem;
+    padding-right: 0px;
+    padding-right: 0rem;
+    padding-bottom: 0px;
+    padding-bottom: 0rem;
+    padding-left: 0px;
+    padding-left: 0rem;
+}
+*/

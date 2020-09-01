@@ -1,0 +1,151 @@
+// Elemente ohne Aussen-Abstand nach
+.abstand-0 {
+  margin-bottom: 0px !important;
+}
+div.abstand-0 {
+  margin-bottom: 0px !important;
+}
+.ce_text.abstand-0 {
+  > * {
+    margin-bottom: 0px !important;
+  }
+}
+.ce_text.abstand-0.lead-gross, .ce_text.lead-gross.abstand-0 {
+  > * {
+    margin-bottom: 0px !important;
+  }
+}
+
+
+// Bei Titeln einen Abstand davor aktivieren (Mengensatz) - auf Element, auf Titel oder über ganze Seite
+div.ce_text.abstand,
+div.ce_list.abstand {
+  margin-top: remcalc(33);
+  h3, h4, h5 {
+    margin-top: remcalc(33);
+  }
+  h2 {
+    margin-top: remcalc(65);
+  }
+  > h2:first-of-type, h4:first-of-type, h5:first-of-type {
+    margin-top: 0px;
+  }
+}
+h3.ce_headline.abstand,
+h4.ce_headline.abstand,
+h5.ce_headline.abstand {
+  margin-top: remcalc(33);
+}
+h2.ce_headline.abstand {
+  margin-top: remcalc(65);
+}
+
+
+// Bei ganzer Mengensatz-Seite zusätzlich Leerzeilen nach p einfügen
+body.abstand #container #main{
+  p {
+    margin-bottom: remcalc(24);
+  }
+  h3 {
+    margin-top: remcalc(65);
+  }
+  h3.ce_headline,
+  h4,
+  h4.ce_headline,
+  h5,
+  h5.ce_headline {
+    margin-top: remcalc(33);
+  }
+  h2,
+  h2.ce_headline {
+    margin-top: remcalc(65);
+  }
+  div.ce_text,
+  div.ce_list {
+    margin-top: remcalc(33);
+    p {
+      margin-bottom: remcalc(24);
+    }
+    h3, h4, h5 {
+      margin-top: remcalc(33);
+    }
+    h2 {
+      margin-top: remcalc(65);
+    }
+    > h2:first-of-type, h4:first-of-type, h5:first-of-type {
+      margin-top: 0px;
+    }
+    > :last-child {
+      margin-bottom: 0px;
+    }
+  }
+  .ce_headline + div.ce_text h3 {
+    margin-top: 0px;
+  }
+}
+
+
+
+
+// #################### Floating und Leerzeilen-DIVs ####################
+
+// Hinweis: wird wegen den Bootstrap-Anpassungen bei Blockelementen ggf. auch als leerer div am Ende benötigt, damit das übergeordnete Element mit dem Inhalt mitwächst
+.clearfix {
+    display: block;
+    width: 100%;
+    float: none;
+    clear: both;
+    overflow: hidden;
+}
+/*
+  div.leerzeile-fix {
+  display: block;
+  width: 100%;
+  float: none;
+  clear: both;
+  height: remcalc(24);
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+}
+*/
+div.abstand-normal-fix {
+  display: block;
+  width: 100%;
+  float: none;
+  clear: both;
+  height: remcalc(33);
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+}
+div.abstand-gross-fix {
+  display: block;
+  width: 100%;
+  float: none;
+  clear: both;
+  height: remcalc(65);
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+}
+div.abstand-a1-gross-fix {
+  display: block;
+  width: 100%;
+  float: none;
+  clear: both;
+  height: remcalc(130);
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+}
+div.abstand-kopf-fix {
+  display: block;
+  width: 100%;
+  float: none;
+  clear: both;
+  height: remcalc(152);
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+}
