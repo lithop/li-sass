@@ -12,7 +12,7 @@
     "defaults"
   ],
   "scripts": {
-    "clean:dist": "rm -r dist/*",
+    "clean:dist": "rm -r -f dist/*",
     "deploy:ftp": "node deploy",
     "compile:nested": "node-sass src/scss -o dist/css --output-style nested",
     "compile:compressed": "node-sass src/scss -o dist/css --output-style compressed",
