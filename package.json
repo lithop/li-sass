@@ -18,11 +18,12 @@
     "compile:nested": "node-sass src/scss -o dist/css --output-style nested",
     "compile:compressed": "node-sass src/scss -o dist/css --output-style compressed",
     "compile:watch": "node-sass src/scss -o dist/css --output-style nested -w -r",
-    "deploy": "npm-run-all build deploy:ftp",
     "deploy:watch": "onchange -i 'dist/*/*.css' -- npm run deploy:ftp",
     "deploy:ftp": "node deploy",
-    "build": "npm-run-all clean:dist compile:compressed css:prefix rename:minified",
-    "develope": "npm-run-all clean:dist compile:nested --parallel compile:watch deploy:watch"
+    "build:local": "npm-run-all clean:dist compile:compressed css:prefix rename:minified",
+    "build:ftp": "npm-run-all build:local deploy:ftp",
+    "develope:local": "npm-run-all clean:dist compile:nested --parallel compile:watch",
+    "develope:ftp": "npm-run-all clean:dist compile:nested --parallel compile:watch deploy:watch"
   },
   "devDependencies": {
     "caniuse-lite": "^1.0.30001124",

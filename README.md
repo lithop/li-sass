@@ -42,22 +42,39 @@ If your environment has changed since running `npm install`. Run `npm rebuild no
 
 ## Usage
 
+### Build
+
+#### Local
+
 ```shell
-npm run build
+npm run build:local
 ```
 
 Generates a minified and prefixed `.css` file inside the `dist` folder.
 
-```shell
-npm run develope
-```
-Generates a nested compiled `.css` file inside the `dist` folder. Watches recursively for any changes made and generates a new file on the fly when needed and auto deploys it to any ftp server configured in the `.env` file.
+#### FTP
 
 ```shell
-npm run deploy
+npm run build:ftp
 ```
 
 Generates a minified and prefixed `.css` file inside the `dist` folder and deploys it to any ftp server configured in the `.env` file.
+
+### Develope
+
+#### Local
+
+```shell
+npm run develope:local
+```
+Generates a nested compiled `.css` file inside the `dist` folder. Watches recursively for any changes made and generates a new file on the fly when needed.
+
+#### FTP
+
+```shell
+npm run develope:ftp
+```
+Generates a nested compiled `.css` file inside the `dist` folder. Watches recursively for any changes made and generates a new file on the fly when needed and auto deploys it to any ftp server configured in the `.env` file.
 
 ## Best use
 
