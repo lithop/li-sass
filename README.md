@@ -51,13 +51,13 @@ Generates a minified and prefixed `.css` file inside the `dist` folder.
 ```shell
 npm run develope
 ```
-Generates a default compiled `.css` file inside the `dist` folder. Watches recursively a directory or file for any changes made and generates a new file on the fly when needed.
+Generates a nested compiled `.css` file inside the `dist` folder. Watches recursively for any changes made and generates a new file on the fly when needed and auto deploys it to any ftp server configured in the `.env` file.
 
 ```shell
 npm run deploy
 ```
 
-Generates a minified and prefixed `.css` file inside the `dist` folder and deploys it to any configured ftp server.
+Generates a minified and prefixed `.css` file inside the `dist` folder and deploys it to any ftp server configured in the `.env` file.
 
 ## Best use
 
