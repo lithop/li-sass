@@ -13,21 +13,23 @@
   ],
   "scripts": {
     "clean:dist": "rm -r -f dist/*",
-    "deploy:ftp": "node deploy",
+    "css:prefix": "postcss dist/css --no-map -u autoprefixer -d dist/css",
+    "rename:minified": "renamer --path-element ext --find css --replace 'min.css' 'dist/**'",
     "compile:nested": "node-sass src/scss -o dist/css --output-style nested",
     "compile:compressed": "node-sass src/scss -o dist/css --output-style compressed",
     "compile:watch": "node-sass src/scss -o dist/css --output-style nested -w -r",
-    "css:prefix": "postcss dist/css --no-map -u autoprefixer -d dist/css",
-    "rename:minified": "renamer --path-element ext --find css --replace 'min.css' 'dist/**'",
+    "deploy": "npm-run-all build deploy:ftp",
+    "deploy:watch": "onchange -i 'dist/*/*.css' -- npm run deploy:ftp",
+    "deploy:ftp": "node deploy",
     "build": "npm-run-all clean:dist compile:compressed css:prefix rename:minified",
-    "develope": "npm-run-all clean:dist compile:nested compile:watch",
-    "deploy": "npm-run-all build deploy:ftp"
+    "develope": "npm-run-all clean:dist compile:nested --parallel compile:watch deploy:watch"
   },
   "devDependencies": {
     "caniuse-lite": "^1.0.30001122",
     "dotenv": "^8.2.0",
     "ftp-deploy": "^2.3.7",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.0.2"
   },
   "dependencies": {
     "autoprefixer": "^9.8.6",
