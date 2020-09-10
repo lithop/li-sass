@@ -22,7 +22,7 @@
     "deploy:ftp": "node deploy",
     "build:local": "npm-run-all clean:dist compile:compressed css:prefix rename:minified",
     "build:ftp": "npm-run-all build:local deploy:ftp",
-    "develope:local": "npm-run-all clean:dist compile:nested --parallel compile:watch",
+    "develope:local": "npm-run-all clean:dist compile:nested compile:watch",
     "develope:ftp": "npm-run-all clean:dist compile:nested --parallel compile:watch deploy:watch"
   },
   "devDependencies": {
