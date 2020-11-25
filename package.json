@@ -26,16 +26,16 @@
     "develope:ftp": "npm-run-all clean:dist compile:nested --parallel compile:watch deploy:watch"
   },
   "devDependencies": {
-    "caniuse-lite": "^1.0.30001124",
+    "caniuse-lite": "^1.0.30001161",
     "dotenv": "^8.2.0",
-    "ftp-deploy": "^2.3.7",
+    "ftp-deploy": "^2.3.8",
     "npm-run-all": "^4.1.5",
-    "onchange": "^7.0.2"
+    "onchange": "^7.1.0"
   },
   "dependencies": {
     "autoprefixer": "^9.8.6",
     "node-sass": "^4.14.1",
-    "postcss": "^7.0.32",
+    "postcss": "^7.0.35",
     "postcss-cli": "^7.1.2",
     "renamer": "^2.0.1"
   }
