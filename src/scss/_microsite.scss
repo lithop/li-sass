@@ -136,17 +136,20 @@
 // Quick Access – change colors here
 $word-vorlage-grau1: #e4eef1;
 $word-vorlage-grau2: #cde0e4;
+$pdf-formular-grau1: #f1f1e4;
+$pdf-formular-grau2: #e4e3cd;
 // tbc ...
 
 @mixin themecolor(
   $lic-grau1-microsite: $lic-grau1,
-  $lic-grau2-microsite: $lic-grau2
+  $lic-grau2-microsite: $lic-grau2,
+  $lic-primary3-microsite: $lic-primary3
 ) {
   .li-hero {
     .onpage-navi {
       p {
         em {
-          color: $lic-secondary6;
+          color: $lic-primary3-microsite;
         }
       }
     }
@@ -186,7 +189,7 @@ $word-vorlage-grau2: #cde0e4;
   h2,
   h3,
   h4 {
-    color: $lic-secondary6;
+    color: $lic-primary3-microsite;
   }
   .beratung {
     h4 {
@@ -213,7 +216,15 @@ $word-vorlage-grau2: #cde0e4;
   &.wordVorlage {
     @include themecolor(
       $lic-grau1-microsite: $word-vorlage-grau1,
-      $lic-grau2-microsite: $word-vorlage-grau2
+      $lic-grau2-microsite: $word-vorlage-grau2,
+      $lic-primary3-microsite: $lic-secondary6
+    );
+  }
+  &.pdfFormular {
+    @include themecolor(
+      $lic-grau1-microsite: $pdf-formular-grau1,
+      $lic-grau2-microsite: $pdf-formular-grau2,
+      $lic-primary3-microsite: $lic-secondary2
     );
   }
 }
