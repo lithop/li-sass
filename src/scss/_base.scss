@@ -951,3 +951,12 @@ div.kopf-icon-zentriert {
   box-shadow: 2px 2px 0px $lic-primary3;
   }
 }
+
+// #################### Overflow visible ####################
+
+.overflowVisible {
+  overflow: visible;
+  .block {
+    overflow: visible;
+  }
+}
