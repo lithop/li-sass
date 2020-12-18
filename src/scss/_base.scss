@@ -958,6 +958,9 @@ div.kopf-icon-zentriert {
   overflow: visible;
   .block {
     overflow: visible;
+    img {
+      overflow: hidden;
+    }
   }
 }
 
@@ -966,4 +969,18 @@ div.kopf-icon-zentriert {
 
 .w-100 {
   width: 100%;
+}
+
+// #################### Grid Slider ####################
+
+.li_gridSliderStart {
+  margin-left: -10px;
+  margin-right: -10px;
+  .content-slider {
+    margin-left: 10px;
+    margin-right: 10px;
+    .slider-wrapper {
+      margin-left: -10px;
+    }
+  }
 }
